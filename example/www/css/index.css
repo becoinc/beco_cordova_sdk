@@ -1,0 +1,114 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    box-sizing: border-box;
+}
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color:rgb(0,121,255);
+}
+
+body {
+    margin:0px;
+    padding:0px;
+    height:100%;
+    width:100%;
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-attachment:fixed;
+    background-color:rgb(0,121,255);
+    overflow: scroll;
+}
+
+.app {
+    padding: 20px;
+    padding-top:40px;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    color:#FFFFFF;
+    font-size:12px;
+}
+
+#becoLogo {
+    background-image: url("../img/beco-logo.svg");
+    width:100px;
+    height:100px;
+    margin: 0 auto;
+    margin-bottom:20px;
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    overflow:visible;
+    margin:0px;
+    padding:0px;
+    text-align:center;
+}
+
+h2 {
+    font-size:16px;
+    font-weight:normal;
+    overflow:visible;
+    margin:0px;
+    padding:10px;
+    text-align:center;
+}
+
+.boxLabel {
+    margin-top:5px;
+    margin-bottom:5px;
+    text-align:left;
+    border: 1px solid white;
+    border-radius:5px;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+.boxLabel td {
+    padding: 4px;
+}
+
+.border-right {
+    text-align: right;
+    font-weight: bold;
+}
+
+@keyframes flickerAnimation {
+  0%   { color:rgba(255,255,255,1); }
+  50%  { color:rgba(255,255,255,0.5); }
+  100% { color:rgba(255,255,255,1); }
+}
+@-o-keyframes flickerAnimation{
+  0%   { color:rgba(255,255,255,1); }
+  50%  { color:rgba(255,255,255,0.5); }
+  100% { color:rgba(255,255,255,1); }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { color:rgba(255,255,255,1); }
+  50%  { color:rgba(255,255,255,0.5); }
+  100% { color:rgba(255,255,255,1); }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { color:rgba(255,255,255,1); }
+  50%  { color:rgba(255,255,255,0.5); }
+  100% { color:rgba(255,255,255,1); }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 1s infinite;
+   -moz-animation: flickerAnimation 1s infinite;
+   -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
+}

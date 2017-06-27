@@ -92,22 +92,23 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if      (action.equals("startScan"))                 { startScan(callbackContext); }
-        else if (action.equals("stopScan"))                  { stopScan(callbackContext); }
-        else if (action.equals("registerHandset"))           { registerHandset(args.getString(0),args.getString(1),args.getString(2),args.getString(3),callbackContext); }
-        else if (action.equals("onReceiveLocationData"))     { onReceiveLocationData(callbackContext); }
-        else if (action.equals("onReportError"))             { onReportError(callbackContext); }
-        else if (action.equals("onReportAppHit"))            { onReportAppHit(callbackContext); }
-        else if (action.equals("onReportStartScanComplete")) { onReportStartScanComplete(callbackContext); }
-        else if (action.equals("setCredentials"))            { setCredentials(args.getString(0),args.getString(1),args.getString(2),callbackContext); }
-        else if (action.equals("setRefreshInterval"))        { setRefreshInterval(args.getString(0),callbackContext); }
-        else if (action.equals("setThresholdAdjustment"))    { setThresholdAdjustment(args.getString(0),callbackContext); }
-        else if (action.equals("getVersion"))                { getVersion(callbackContext); }
-        else if (action.equals("getThresholdAdjustment"))    { getThresholdAdjustment(callbackContext); }
-        else if (action.equals("getRefreshInterval"))        { getRefreshInterval(callbackContext); }
-        else if (action.equals("getSdkState"))               { getSdkState(callbackContext); }
-        else if (action.equals("getHSID"))                   { getHSID(callbackContext); }
-        else { return false; }
+        cordova.getThreadPool().execute(new Runnable() {
+            if      (action.equals("startScan"))                 { startScan(callbackContext); }
+            else if (action.equals("stopScan"))                  { stopScan(callbackContext); }
+            else if (action.equals("registerHandset"))           { registerHandset(args.getString(0),args.getString(1),args.getString(2),args.getString(3),callbackContext); }
+            else if (action.equals("onReceiveLocationData"))     { onReceiveLocationData(callbackContext); }
+            else if (action.equals("onReportError"))             { onReportError(callbackContext); }
+            else if (action.equals("onReportAppHit"))            { onReportAppHit(callbackContext); }
+            else if (action.equals("onReportStartScanComplete")) { onReportStartScanComplete(callbackContext); }
+            else if (action.equals("setCredentials"))            { setCredentials(args.getString(0),args.getString(1),args.getString(2),callbackContext); }
+            else if (action.equals("setRefreshInterval"))        { setRefreshInterval(args.getString(0),callbackContext); }
+            else if (action.equals("setThresholdAdjustment"))    { setThresholdAdjustment(args.getString(0),callbackContext); }
+            else if (action.equals("getVersion"))                { getVersion(callbackContext); }
+            else if (action.equals("getThresholdAdjustment"))    { getThresholdAdjustment(callbackContext); }
+            else if (action.equals("getRefreshInterval"))        { getRefreshInterval(callbackContext); }
+            else if (action.equals("getSdkState"))               { getSdkState(callbackContext); }
+            else if (action.equals("getHSID"))                   { getHSID(callbackContext); }
+        });
         return true;
     }
     

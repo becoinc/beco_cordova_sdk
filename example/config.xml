@@ -49,7 +49,7 @@
     <splash height="1242" src="res/launch/0_Beco_App_Loading_2208x1242_v1.png" width="2208" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
-    <plugin name="beco-cordova-plugin" spec="../BecoCordovaPlugin" />
+    <plugin name="beco-cordova-plugin" spec="../plugin" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />

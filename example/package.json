@@ -6,13 +6,13 @@
     "main": "index.js",
     "author": "Beco, Inc",
     "dependencies": {
-        "BecoCordovaPlugin": "file:///Users/chrisdalke/Desktop/Beco/Repositories/cordova_wrapper/BecoCordovaPlugin",
+        "BecoCordovaPlugin": "file:///Users/chrisdalke/Desktop/Beco/Repositories/beco_cordova_sdk/plugin",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-android-permissions": "^1.0.0",
         "cordova-plugin-console": "^1.0.7",
         "cordova-plugin-whitelist": "^1.3.2",
-        "beco-cordova-plugin": "../BecoCordovaPlugin"
+        "beco-cordova-plugin": "../plugin"
     },
     "cordova": {
         "plugins": {

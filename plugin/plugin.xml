@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="beco-cordova-plugin" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>BecoCordovaPlugin</name>
+
+    <js-module name="BecoCordovaPlugin" src="www/BecoCordovaPlugin.js">
+        <clobbers target="BecoCordovaPlugin"/>
+    </js-module>
+
+    <!-- IOS -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BecoCordovaPlugin">
+                <param name="ios-package" value="BecoCordovaPlugin" />
+            </feature>
+        </config-file>
+        
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>NSLocationAlwaysUsageDescription</key>
+                    <string>GENERIC_ALL_USAGE_DESCRIPTION</string>
+                </dict>
+            </array>
+        </config-file>
+        
+        <source-file src="src/ios/BecoCordovaPlugin.m" />
+
+        <framework src="src/ios/lib/BecoSDK.framework" custom="true" embed="true"/>
+        <framework src="src/ios/lib/ObjcExceptionBridging.framework" custom="true" embed="true"/>
+        <framework src="src/ios/lib/XCGLogger.framework" custom="true" embed="true"/>
+    </platform>
+    
+    <!-- ANDROID -->
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BecoCordovaPlugin">
+                <param name="android-package" value="beco.plugin.cordova.BecoCordovaPlugin" />
+            </feature>
+        </config-file>
+        
+        <source-file src="src/android/BecoCordovaPlugin.java" target-dir="src/beco/plugin/cordova" />
+        
+        <framework src="src/android/beco-cordova-android.gradle" custom="true" type="gradleReference" />
+        <resource-file src="src/android/lib/libbecoandroidsdk-all-release.aar" target="libs/libbecoandroidsdk-all-release.aar" />
+
+    </platform>
+
+</plugin>

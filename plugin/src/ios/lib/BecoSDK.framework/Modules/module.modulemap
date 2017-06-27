@@ -1,0 +1,10 @@
+framework module BecoSDK {
+  umbrella header "BecoSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module BecoSDK.Swift {
+    header "BecoSDK-Swift.h"
+}

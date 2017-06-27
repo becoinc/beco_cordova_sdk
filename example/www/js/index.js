@@ -17,8 +17,8 @@ var app = {
         $("#statusLabel").text("Status: Loading...");
 
         //Set the user credentials
-        var username = "webdemouser@beco.io";
-        var password = "webdemouser";
+        var username = "<INSERT SDK USERNAME HERE>";
+        var password = "<INSERT SDK PASSWORD HERE>";
         var hostname = "api.beco.io";
         BecoCordovaPlugin.setCredentials(hostname,username,password);
 

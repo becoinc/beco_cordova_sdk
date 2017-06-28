@@ -20,11 +20,12 @@ This README provides installation and usage instructions for developers deployin
     - [1) Initialization & Setup](#1-initialization--setup)
     - [2) Registering Handset](#2-registering-handset)
     - [3) Registering Event Callbacks](#3-registering-event-callbacks)
-    - [4) Start/Stop Scanning](#4-start-stop-scanning)
+    - [4) Start/Stop Scanning](#4-startstop-scanning)
     - [5) Adjusting Tweak Values](#5-adjusting-tweak-values)
-    - [6) Utility / Information Functions](#6-utility-information-functions)
+    - [6) Utility / Information Functions](#6-utility--information-functions)
     - [7) Additional Functionality](#7-additional-functionality)
 - [Nuances](#nuances)
+    - [Simulator Usage](#simulator-usage)
     - [Bluetooth Status](#bluetooth-status)
     - [Long-Term Analytics](#long-term-analytics)
 - [Example Application](#example-application)
@@ -65,9 +66,9 @@ There are several platform-specific settings that must be configured to deploy a
 
 |Key|Value(s)|
 |---|---|
-|UIBackgroundModes|fetch, remote-notification|
-|UIRequiredDeviceCapabilities|location-services|
-|NSLocationAlwaysUsageDescription|<Your App Name> needs your location in order to work properly.|
+|UIBackgroundModes|`fetch`, `remote-notification`|
+|UIRequiredDeviceCapabilities|`location-services`|
+|NSLocationAlwaysUsageDescription|`This app needs your location in order to work properly.`|
 **Note:** In the above chart, commas indicate an array of values.
 
 You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when requesting location permission.
@@ -83,18 +84,17 @@ You may change the NSLocationAlwaysUsageDescription if you'd like to alter the m
 #### Android Project Configuration
 There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android. The Android project itself should work correctly out of the box, but some programming is required to correctly set up permissioning.
 
-Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
+Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The SDK requires the `ACCESS_COARSE_LOCATION` permission. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
 
-###### Sample Permissioning Setup
+##### Sample Permissioning Setup
 A simple way to enable Android permissioning is via the `cordova-plugin-android-permissions` plugin, which provides a JS interface for the Android SDK's permissioning system.
 
-To install `corova-plugin-android-permissions` in your project, run the following cordova command in your project directory:
+To install `cordova-plugin-android-permissions` in your project, run the following cordova command in your project directory:
 ```
 cordova plugin add cordova-plugin-android-permissions
 ```
 
-Then, once the application initializes, request permission using the following code, optionally passing in success/error callbacks to run code based on whether the application
-has the correct permissions.
+Then, somewhere in your application code, request permission using the following code, optionally passing in success/error callbacks to run code based on whether the application has the correct permissions. A good place to request permission is after calling `registerHandset` and before calling `startScan`.
 ```javascript
 var permissions = cordova.plugins.permissions;
 permissions.requestPermission(permissions.ACCESS_COARSE_LOCATION, success, error);
@@ -385,7 +385,7 @@ Specifically, on iOS the SDK does not invoke `CBCentralManager` to detect the cu
 The Beco SDK collects long-term analytics data for the space in which your beacons have been installed. This data can be analyzed through the [Beco Cloud Portal](https://portal.beco.io/). This analytics data collection is built into the API, and does not require additional configuration.
 
 ## Example Application
-An example application has been included with this repository. The example application demonstrates the functionality of the Beco Cordova SDK in a JS-based app. Before running the example application, you must insert your SDK Credentials into `www/js/index.js`, the root javascript file for the project. Once you build and run the example application on a phone and configure your Beco Beacons in your space, you should be able to walk around the space and view realtime location data. Specific configuration is described in the `README.md` within the example application directory.
+An example application has been included in a separate repository, at [https://github.com/becoinc/beco_cordova_examples](https://github.com/becoinc/beco_cordova_examples). The example application demonstrates the functionality of the Beco Cordova SDK in a JS-based app. Specific configuration and instructions are described in the `README.md` within the example project git repository.
 
 ## Appendix
 #### License

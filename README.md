@@ -43,7 +43,7 @@ The Beco Cordova SDK has been tested using Apache Cordova version 7.0.1.
 The Beco SDK requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running at least iOS 9.0. We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 9.3.x and 10.3. We expect other iOS devices and versions to work similarly, but they have not been tested by Beco. The Beco iOS SDK requires iOS 9.0 or newer. The SDK has been built with Universal (iPhone and iPad) support.
 
 #### Android Device Requirements
-The Beco SDK requires an android device with bluetooth capabilities and Android OS version >=23.
+The Beco SDK requires an android device with bluetooth capabilities and Android OS version >=18, with a target version 23.
 
 ## Installation
 
@@ -51,7 +51,7 @@ The Beco SDK requires an android device with bluetooth capabilities and Android 
 
 The Beco Cordova SDK can be installed in your project using the following command:
 
-    cordova plugin add https://github.com/becoinc/beco_cordova_sdk.git
+    cordova plugin add https://github.com/becoinc/beco_cordova_sdk.git#master
 
 Once you have added the plugin, run `cordova build` to update the platform-specific project files to reflect the changes.
 
@@ -69,6 +69,7 @@ There are several platform-specific settings that must be configured to deploy a
 |UIBackgroundModes|`fetch`, `remote-notification`|
 |UIRequiredDeviceCapabilities|`location-services`|
 |NSLocationAlwaysUsageDescription|`This app needs your location in order to work properly.`|
+
 **Note:** In the above chart, commas indicate an array of values.
 
 You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when requesting location permission.
@@ -82,7 +83,10 @@ You may change the NSLocationAlwaysUsageDescription if you'd like to alter the m
 ![readme-guide-1](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/readme-guide-2.png)
 
 #### Android Project Configuration
-There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android. The Android project itself should work correctly out of the box, but some programming is required to correctly set up permissioning.
+There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android.
+
+Change the `minSdkVersion` and `targetSdkVersion` in AndroidManifest.xml to 18 and 23 respectively, as shown below:
+    <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="23" />
 
 Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The SDK requires the `ACCESS_COARSE_LOCATION` permission. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
 

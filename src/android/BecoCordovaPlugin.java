@@ -92,22 +92,48 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        cordova.getThreadPool().execute(new Runnable() {
-            if      (action.equals("startScan"))                 { startScan(callbackContext); }
-            else if (action.equals("stopScan"))                  { stopScan(callbackContext); }
-            else if (action.equals("registerHandset"))           { registerHandset(args.getString(0),args.getString(1),args.getString(2),args.getString(3),callbackContext); }
-            else if (action.equals("onReceiveLocationData"))     { onReceiveLocationData(callbackContext); }
-            else if (action.equals("onReportError"))             { onReportError(callbackContext); }
-            else if (action.equals("onReportAppHit"))            { onReportAppHit(callbackContext); }
-            else if (action.equals("onReportStartScanComplete")) { onReportStartScanComplete(callbackContext); }
-            else if (action.equals("setCredentials"))            { setCredentials(args.getString(0),args.getString(1),args.getString(2),callbackContext); }
-            else if (action.equals("setRefreshInterval"))        { setRefreshInterval(args.getString(0),callbackContext); }
-            else if (action.equals("setThresholdAdjustment"))    { setThresholdAdjustment(args.getString(0),callbackContext); }
-            else if (action.equals("getVersion"))                { getVersion(callbackContext); }
-            else if (action.equals("getThresholdAdjustment"))    { getThresholdAdjustment(callbackContext); }
-            else if (action.equals("getRefreshInterval"))        { getRefreshInterval(callbackContext); }
-            else if (action.equals("getSdkState"))               { getSdkState(callbackContext); }
-            else if (action.equals("getHSID"))                   { getHSID(callbackContext); }
+        final String threadedAction = action;
+        final JSONArray threadedArgs = args;
+        final CallbackContext threadedCallbackContext = callbackContext;
+        cordova.getThreadPool().execute(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    if (threadedAction.equals("startScan")) {
+                        startScan(threadedCallbackContext);
+                    } else if (threadedAction.equals("stopScan")) {
+                        stopScan(threadedCallbackContext);
+                    } else if (threadedAction.equals("registerHandset")) {
+                        registerHandset(threadedArgs.getString(0), threadedArgs.getString(1), threadedArgs.getString(2), threadedArgs.getString(3), threadedCallbackContext);
+                    } else if (threadedAction.equals("onReceiveLocationData")) {
+                        onReceiveLocationData(threadedCallbackContext);
+                    } else if (threadedAction.equals("onReportError")) {
+                        onReportError(threadedCallbackContext);
+                    } else if (threadedAction.equals("onReportAppHit")) {
+                        onReportAppHit(threadedCallbackContext);
+                    } else if (threadedAction.equals("onReportStartScanComplete")) {
+                        onReportStartScanComplete(threadedCallbackContext);
+                    } else if (threadedAction.equals("setCredentials")) {
+                        setCredentials(threadedArgs.getString(0), threadedArgs.getString(1), threadedArgs.getString(2), threadedCallbackContext);
+                    } else if (threadedAction.equals("setRefreshInterval")) {
+                        setRefreshInterval(threadedArgs.getString(0), threadedCallbackContext);
+                    } else if (threadedAction.equals("setThresholdAdjustment")) {
+                        setThresholdAdjustment(threadedArgs.getString(0), threadedCallbackContext);
+                    } else if (threadedAction.equals("getVersion")) {
+                        getVersion(threadedCallbackContext);
+                    } else if (threadedAction.equals("getThresholdAdjustment")) {
+                        getThresholdAdjustment(threadedCallbackContext);
+                    } else if (threadedAction.equals("getRefreshInterval")) {
+                        getRefreshInterval(threadedCallbackContext);
+                    } else if (threadedAction.equals("getSdkState")) {
+                        getSdkState(threadedCallbackContext);
+                    } else if (threadedAction.equals("getHSID")) {
+                        getHSID(threadedCallbackContext);
+                    }
+                } catch (JSONException e){
+                    //Couldn't run the command...
+                }
+            }
         });
         return true;
     }

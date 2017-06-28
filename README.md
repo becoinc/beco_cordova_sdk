@@ -1,6 +1,6 @@
 
 
-# ![Beco Logo](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/beco-logo-small.png) Beco Cordova SDK
+# ![Beco Logo](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/beco-logo-tiny.png) Beco Cordova SDK
 _An Apache Cordova version of the Beco SDK with Android and iOS support._
 
 The Beco SDK provides developers a rapid path towards iBeacon integration. While other solutions focus on providing a light wrapper to existing beacon APIs, the Beco Cordova SDK has taken the approach of providing a turn-key solution with a greatly simplified API, designed to let users leverage the power of the Beco Cloud service while being as easy to integrate as Beco Beacons are to deploy.
@@ -14,7 +14,7 @@ This README provides installation and usage instructions for developers deployin
     - [Cordova Plugin Installation](#cordova-plugin-installation)
     - [iOS Project Configuration](#ios-project-configuration)
     - [Android Project Configuration](#android-project-configuration)
-        - [Sample Permissioning Code](#sample-permissioning-code)
+        - [Sample Permissioning Setup](#sample-permissioning-setup)
 - [SDK Overview](#sdk-overview)
 - [SDK Guide](#sdk-guide)
     - [1) Initialization & Setup](#1-initialization--setup)
@@ -27,25 +27,33 @@ This README provides installation and usage instructions for developers deployin
 - [Nuances](#nuances)
     - [Bluetooth Status](#bluetooth-status)
     - [Long-Term Analytics](#long-term-analytics)
-- [Example Application](#Example Application)
-- [Appendix](#Appendix)
-    - [License](#License)
-    - [Export Statement](#Export Statement)
+- [Example Application](#example-application)
+- [Appendix](#appendix)
+    - [License](#license)
+    - [Export Statement](#export-statement)
 
 ## Release Notes
 v1.0.0 _BETA_ - Initial release of the Beco Cordova SDK. Includes support for Android and iOS. This version of the plugin supports realtime location data and long-term analytics data collection. The plugin is currently in BETA, and functionality may change in future releases.
 
 ## Prerequisites
-The Beco Cordova SDK supports Cordova version ???.
-It has been tested using Apache Cordova version 7.0.1
+The Beco Cordova SDK has been tested using Apache Cordova version 7.0.1.
 
-The Beco SDK requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running at least iOS 9.0. We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 9.3.x and 10.3. We expect other iOS devices and versions to work similarly, but they have not been tested by Beco.
+#### iOS Device Requirements
+The Beco SDK requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running at least iOS 9.0. We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 9.3.x and 10.3. We expect other iOS devices and versions to work similarly, but they have not been tested by Beco. The Beco iOS SDK requires iOS 9.0 or newer. The SDK has been built with Universal (iPhone and iPad) support.
 
-The Beco iOS SDK requires iOS 9.0 or newer. The SDK has been built with Universal (iPhone and iPad) support.
+#### Android Device Requirements
+The Beco SDK requires an android device with bluetooth capabilities and Android OS version >=23.
 
 ## Installation
 
 #### Cordova Plugin Installation
+
+First, download the project
+
+git clone https://github.com/becoinc/beco_cordova_sdk.git
+cd beco_cordova_sdk
+
+
     cordova plugin add https://github.com/becoinc/beco_cordova_sdk.git
 
 #### iOS Project Configuration
@@ -54,7 +62,7 @@ There are several platform-specific settings that must be configured to deploy a
 #### Android Project Configuration
 There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android. Most importantly, Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
 
-###### Sample Permissioning
+###### Sample Permissioning Setup
 A simple way to enable Android permissioning is via the `cordova-plugin-android-permissions` plugin, which provides a JS interface for the Android SDK's permissioning system.
 
 To install `corova-plugin-android-permissions` in your project, run the following cordova command in your project directory:
@@ -109,7 +117,7 @@ BecoCordovaPlugin.setRefreshInterval(value);
 BecoCordovaPlugin.getRefreshInterval(callback);
 ```
 #### Utility / Information
-Used to get various information about the Sdk, such as the version or current state of the scanner.
+Used to get various information about the SDK, such as the version or current state of the scanner.
 ```javascript
 BecoCordovaPlugin.getVersion(callback);
 BecoCordovaPlugin.getPlatformVersion(callback);
@@ -159,7 +167,7 @@ It is safe to call this function at every application startup. If the handset ha
 
 #### 3) Registering Event Callbacks
 The SDK returns real-time location data using callback functions that can be registered at any time. The SDK will call the callback functions each time new data is generated for the corresponding event. By using these event callback functions, you can obtain realtime location data from the SDK.
-It is recommended that you register callback functions before beginning the scan so that your application does not miss events returned before the callbacks have been registered.
+It is recommended that you register callback functions before beginning the scan so that your application does not miss any events.
 
 The following events are supported:
 
@@ -172,7 +180,7 @@ The following events are supported:
 
 These events are described in more detail below.
 
-###### onReceiveLocationData
+##### onReceiveLocationData
 
 This event will return realtime location data based on the beacon scanning system.
 You may get the same location data sent multiple times as a status refresh. It is up to the user to handle this condition.
@@ -186,8 +194,22 @@ The SDK may report an unknown location for one of several reasons:
 The location data will be returned as a JS object, displayed here as JSON:
 ```JSON
 {
-    "errorCode" : 0,
-    "errorString" : "Error String"
+    "becoId" : "XXXXXX",
+    "hsid" : "XXXXXX",
+    "place" : {
+        "placeName" : "Place Name",
+        "placeId" : "XXXXXX",
+        "comments" : null,
+        "capacity" : 0,
+        "floor" : {
+            "name" : "Twelfth Floor",
+            "floorId" : 12
+        },
+        "location" : {
+            "locationName" : "Location Name",
+            "locationId" : "XXXXXX"
+        }
+    }
 }
 ```
 Depending on the configuration of your beacon, some of these fields may be left blank. Many of these fields are editable via the Beco Cloud Portal
@@ -196,10 +218,10 @@ If you wish to use these fields for realtime location data in your app, the use 
 In foreground mode, the onReceiveLocationData event will be called approximately once every 10 seconds, and the frequency can be tweaked via the SDK (See “Adjusting Tweak Values”).
 In background mode, the onReceiveLocationData will be called approximately once every 1-3 minutes.
 
-###### onReportAppHit
+##### onReportAppHit
 This event will return a Beco Beacon ID corresponding to the closest beacon to the phone's location. This event is called as soon as the SDK detects a beacon and before it sends the data to the Beco Cloud to obtain more detailed information. **This event is deprecated**, and is currently disabled on Android. To access realtime location hits, please use the onReceiveLocationData event.
 
-###### onReportError
+##### onReportError
 This event will fire when an SDK error/event has occurred. The error data will be returned as a JS object, displayed here as JSON:
 ```JSON
 {
@@ -209,18 +231,19 @@ This event will fire when an SDK error/event has occurred. The error data will b
 ```
 
 The following errors may occur:
+
 |Error Code|Error String|Description|
 |---|---|---|
-|0|Credential Mismatch|The SDK Credentials specified do not match the beacon scanned.
-|1|Customer Not Found|The SDK Credentials specified were not found as a customer.
-|2|Rate Limit Exceeded|The server has reported a rate limit violation.
-|3|Server Communication failure|There was a problem communicating with the Beco Cloud Services.
-|4|Bluetooth Disabled|Bluetooth has been disabled. This event will not fire with the current API version (See "Nuances")
-|5|Bluetooth Enabled|Bluetooth has been reenabled. This event will not fire with the current API version (See "Nuances")
-|6|Location Disabled|Location Services have been disabled.
-|7|Location Enabled|Location Services have been reenabled.
+|0|Credential Mismatch|The SDK Credentials specified do not match the beacon scanned.|
+|1|Customer Not Found|The SDK Credentials specified were not found as a customer.|
+|2|Rate Limit Exceeded|The server has reported a rate limit violation.|
+|3|Server Communication failure|There was a problem communicating with the Beco Cloud Services.|
+|4|Bluetooth Disabled|Bluetooth has been disabled. This event will not fire with the current API version (See "Nuances")|
+|5|Bluetooth Enabled|Bluetooth has been reenabled. This event will not fire with the current API version (See "Nuances")|
+|6|Location Disabled|Location Services have been disabled.|
+|7|Location Enabled|Location Services have been reenabled.|
 
-###### onReportStartScanComplete
+##### onReportStartScanComplete
 This event will fire when the SDK has started scanning, and provides a way to diagnose the status of the beacon scanning system.The event data will be returned as a JS object, displayed here as JSON:
 ```JSON
 {
@@ -270,14 +293,13 @@ This value adjusts the positioning sensitivity of the phone.
 We recommend using our default, set at '3', however for applications that require the Beco Beacons to be installed in higher ceilings
 (5-6 meters), it will be necessary to increase the sensitivity level in order to ensure higher levels of location accuracy.
 The higher the ceiling, the higher this threshold should be.
-
 For other applications, such as placing a Beco Beacon on a desk or other very close applications (less than 1 meter), you can
 decrease this value substantially in order to maintain location precision.
 
 This value must be determined experimentally. We recommend using the default value unless default behavior shows
 poor location tracking. Acceptable values are from -20 to 50.
 
-the threshold adjustment value can be set in the following manner:
+The threshold adjustment value can be set in the following manner:
 ```javascript
 BecoCordovaPlugin.setThresholdAdjustment(value);
 ```

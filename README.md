@@ -48,19 +48,39 @@ The Beco SDK requires an android device with bluetooth capabilities and Android 
 
 #### Cordova Plugin Installation
 
-First, download the project
-
-git clone https://github.com/becoinc/beco_cordova_sdk.git
-cd beco_cordova_sdk
-
+The Beco Cordova SDK can be installed in your project using the following command:
 
     cordova plugin add https://github.com/becoinc/beco_cordova_sdk.git
+
+Once you have added the plugin, run `cordova build` to update the platform-specific project files to reflect the changes.
 
 #### iOS Project Configuration
 There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on iOS.
 
+In the capabilities section of your app’s main target configuration, you need to declare the following for the Beco SDK:
+
+![readme-guide-1](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/readme-guide-1.png)
+
+The following keys must be set in the `Info.plist` file:
+|Key|Value(s)|
+|---|---|
+|UIBackgroundModes|fetch, remote-notification|
+|UIRequiredDeviceCapabilities|location-services|
+|NSLocationAlwaysUsageDescription|<Your App Name> needs your location in order to work properly.|
+**Note:** In the above chart, commas indicate an array of values. You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when requesting location permission.
+
+You must enabled the **"Always Embed Swift Standard Libraries"** build flag.
+
+In order to work around an app store submission bug, documented here in Radar: http://www.openradar.me/radar?id=6409498411401216, you need to add the following shell script execution to the “Build Phases” section of your app build.
+
+    bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/BecoSDK.framework/strip-frameworks.sh"
+
+![readme-guide-1](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/readme-guide-2.png)
+
 #### Android Project Configuration
-There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android. Most importantly, Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
+There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android. The Android project itself should work correctly out of the box, but some programming is required to correctly set up permissioning.
+
+Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
 
 ###### Sample Permissioning Setup
 A simple way to enable Android permissioning is via the `cordova-plugin-android-permissions` plugin, which provides a JS interface for the Android SDK's permissioning system.
@@ -344,6 +364,11 @@ to the web endpoints and is compatible with the Beco Cordova SDK.
 
 ## Nuances
 This section describes nuances of using the Beco SDK, and any features that are not immediately obvious but are necessary for proper usage of the API.
+
+#### Simulator Usage
+Because the Beco SDK relies on bluetooth data based on real-world beacons, it is not recommended that you test location tracking functionality
+from inside a simulator. the Cordova SDK will not function correctly inside a simulator, and will not start scanning successfully. The best
+way to perform testing using the SDK is to configure a real-world test environment with beacons and a physical device.
 
 #### Bluetooth Status
 

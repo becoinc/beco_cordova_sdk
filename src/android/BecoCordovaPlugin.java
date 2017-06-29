@@ -93,48 +93,50 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         final String threadedAction = action;
-        final JSONArray threadedArgs = args;
+        final JSONArray threadedArgs = new JSONArray(args.toString());
         final CallbackContext threadedCallbackContext = callbackContext;
-        cordova.getThreadPool().execute(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    if (threadedAction.equals("startScan")) {
-                        startScan(threadedCallbackContext);
-                    } else if (threadedAction.equals("stopScan")) {
-                        stopScan(threadedCallbackContext);
-                    } else if (threadedAction.equals("registerHandset")) {
-                        registerHandset(threadedArgs.getString(0), threadedArgs.getString(1), threadedArgs.getString(2), threadedArgs.getString(3), threadedCallbackContext);
-                    } else if (threadedAction.equals("onReceiveLocationData")) {
-                        onReceiveLocationData(threadedCallbackContext);
-                    } else if (threadedAction.equals("onReportError")) {
-                        onReportError(threadedCallbackContext);
-                    } else if (threadedAction.equals("onReportAppHit")) {
-                        onReportAppHit(threadedCallbackContext);
-                    } else if (threadedAction.equals("onReportStartScanComplete")) {
-                        onReportStartScanComplete(threadedCallbackContext);
-                    } else if (threadedAction.equals("setCredentials")) {
-                        setCredentials(threadedArgs.getString(0), threadedArgs.getString(1), threadedArgs.getString(2), threadedCallbackContext);
-                    } else if (threadedAction.equals("setRefreshInterval")) {
-                        setRefreshInterval(threadedArgs.getString(0), threadedCallbackContext);
-                    } else if (threadedAction.equals("setThresholdAdjustment")) {
-                        setThresholdAdjustment(threadedArgs.getString(0), threadedCallbackContext);
-                    } else if (threadedAction.equals("getVersion")) {
-                        getVersion(threadedCallbackContext);
-                    } else if (threadedAction.equals("getThresholdAdjustment")) {
-                        getThresholdAdjustment(threadedCallbackContext);
-                    } else if (threadedAction.equals("getRefreshInterval")) {
-                        getRefreshInterval(threadedCallbackContext);
-                    } else if (threadedAction.equals("getSdkState")) {
-                        getSdkState(threadedCallbackContext);
-                    } else if (threadedAction.equals("getHSID")) {
-                        getHSID(threadedCallbackContext);
-                    }
-                } catch (JSONException e){
-                    //Couldn't run the command...
-                }
+        
+        //cordova.getThreadPool().execute(new Runnable(){
+        //@Override
+        //public void run() {
+        try {
+            if (threadedAction.equals("startScan")) {
+                startScan(threadedCallbackContext);
+            } else if (threadedAction.equals("stopScan")) {
+                stopScan(threadedCallbackContext);
+            } else if (threadedAction.equals("registerHandset")) {
+                registerHandset(threadedArgs.getString(0), threadedArgs.getString(1), threadedArgs.getString(2), threadedArgs.getString(3), threadedCallbackContext);
+            } else if (threadedAction.equals("onReceiveLocationData")) {
+                onReceiveLocationData(threadedCallbackContext);
+            } else if (threadedAction.equals("onReportError")) {
+                onReportError(threadedCallbackContext);
+            } else if (threadedAction.equals("onReportAppHit")) {
+                onReportAppHit(threadedCallbackContext);
+            } else if (threadedAction.equals("onReportStartScanComplete")) {
+                onReportStartScanComplete(threadedCallbackContext);
+            } else if (threadedAction.equals("setCredentials")) {
+                setCredentials(threadedArgs.getString(0), threadedArgs.getString(1), threadedArgs.getString(2), threadedCallbackContext);
+            } else if (threadedAction.equals("setRefreshInterval")) {
+                setRefreshInterval(threadedArgs.getString(0), threadedCallbackContext);
+            } else if (threadedAction.equals("setThresholdAdjustment")) {
+                setThresholdAdjustment(threadedArgs.getString(0), threadedCallbackContext);
+            } else if (threadedAction.equals("getVersion")) {
+                getVersion(threadedCallbackContext);
+            } else if (threadedAction.equals("getThresholdAdjustment")) {
+                getThresholdAdjustment(threadedCallbackContext);
+            } else if (threadedAction.equals("getRefreshInterval")) {
+                getRefreshInterval(threadedCallbackContext);
+            } else if (threadedAction.equals("getSdkState")) {
+                getSdkState(threadedCallbackContext);
+            } else if (threadedAction.equals("getHSID")) {
+                getHSID(threadedCallbackContext);
             }
-        });
+        } catch (JSONException e){
+            //Couldn't run the command...
+            if (DEBUG) e.printStackTrace();
+        }
+        //    }
+        //});
         return true;
     }
     
@@ -214,8 +216,8 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                 }
             });
         } catch (Exception e){
-            if (DEBUG) LOG.e(TAG,"Failed to register handset! Invalid parameter set!");
-            callbackContext.error("Failed to register handset!"+e.getMessage());
+            if (DEBUG) LOG.e(TAG,"Failed to register handset! Invalid parameter set! "+e.getMessage());
+            callbackContext.error("Failed to register handset! "+e.getMessage());
         }
     }
     

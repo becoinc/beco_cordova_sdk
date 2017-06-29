@@ -1,5 +1,5 @@
 {
-  "name": "BecoCordovaPlugin",
+  "name": "beco-cordova-plugin",
   "version": "0.0.1",
   "description": "Beco API Cordova Plugin.",
   "cordova": {

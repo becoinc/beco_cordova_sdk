@@ -36,6 +36,8 @@ This README provides installation and usage instructions for developers deployin
     - [Export Statement](#export-statement)
 
 ## Release Notes
+v1.0.1 _BETA_ - Updated Android API to v1.8.6.
+
 v1.0.0 _BETA_ - Initial release of the Beco Cordova SDK. Includes support for Android and iOS. This version of the plugin supports realtime location data and long-term analytics data collection. The plugin is currently in BETA, and functionality may change in future releases.
 
 ## Prerequisites
@@ -393,7 +395,7 @@ Since the Beco SDK does not interface with Bluetooth directly, using Bluetooth v
 
 It is up to the developer to ensure their UI/UX communicates to the user that Bluetooth be enabled, even though the app itself does not require Bluetooth permissions.
 
-Specifically, on iOS the SDK does not invoke `CBCentralManager` to detect the current phone Bluetooth enabled/disabled state. This is done to minimize user annoyance with OS pop-ups. In certain circumstances iOS will prompt the user to enable Bluetooth for Location services. If SDK customers wish to remind their app users about enabling Bluetooth, then they should invoke `CBCentralManager` as appropriate. 
+Specifically, on iOS the SDK does not invoke `CBCentralManager` to detect the current phone Bluetooth enabled/disabled state. This is done to minimize user annoyance with OS pop-ups. In certain circumstances iOS will prompt the user to enable Bluetooth for Location services. If SDK customers wish to remind their app users about enabling Bluetooth, then they should invoke `CBCentralManager` as appropriate.
 
 #### Long-Term Analytics
 The Beco SDK collects long-term analytics data for the space in which your beacons have been installed. This data can be analyzed through the [Beco Cloud Portal](https://portal.beco.io/). This analytics data collection is built into the API, and does not require additional configuration.

@@ -8,6 +8,9 @@ Instructions to install new version of Android SDK
 4) Navigate into file using ZIP utility. clear the 'res' folder of all resources
 except for the `xml` folder.
 5) remove strings/icon references from the application manifest.
-Step 4 and 5 are necessary in order for Cordova to build for Android properly.
 
-Latest version: 20170710
+Step 4 and 5 are necessary in order for Android Studio to correctly build a merged
+application manifest. The project will not build if there are settings from the API
+manifest that overlap settings in the project manifest.
+
+Latest version: 20170724

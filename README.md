@@ -36,6 +36,9 @@ This README provides installation and usage instructions for developers deployin
     - [Export Statement](#export-statement)
 
 ## Release Notes
+
+v1.0.2 _BETA_ - Updated Android API to v1.8.9.
+
 v1.0.1 _BETA_ - Updated Android API to v1.8.6.
 
 v1.0.0 _BETA_ - Initial release of the Beco Cordova SDK. Includes support for Android and iOS. This version of the plugin supports realtime location data and long-term analytics data collection. The plugin is currently in BETA, and functionality may change in future releases.

@@ -13,4 +13,4 @@ Step 4 and 5 are necessary in order for Android Studio to correctly build a merg
 application manifest. The project will not build if there are settings from the API
 manifest that overlap settings in the project manifest.
 
-Latest version: 20170724
+Latest version: libbecoandroidsdk-release-20170911-77bb63f.aar

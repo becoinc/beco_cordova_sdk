@@ -195,17 +195,20 @@ typedef SWIFT_ENUM(NSInteger, BecoSDKErrorCode) {
   BecoSDKErrorCodeCustomerNotFound = 1,
 /// Error code if the backend reported a rate limit violation.
   BecoSDKErrorCodeRateLimitExceeded = 2,
+/// Error code reported if there was a problem executing
+/// a server command.
+  BecoSDKErrorCodeServerParsingError = 3,
 /// Error code reported if there was a network problem communicating
 /// with the Beco Cloud services.
-  BecoSDKErrorCodeServerCommunicationFailure = 3,
+  BecoSDKErrorCodeServerCommunicationFailure = 4,
 /// Error code reported if Bluetooth is/has been disabled.
-  BecoSDKErrorCodeBluetoothDisabled = 4,
+  BecoSDKErrorCodeBluetoothDisabled = 5,
 /// Error code reported if Bluetooth is/has been enabled.
-  BecoSDKErrorCodeBluetoothEnabled = 5,
+  BecoSDKErrorCodeBluetoothEnabled = 6,
 /// Error code reported if Location Services is/has been disabled.
-  BecoSDKErrorCodeLocationDisabled = 6,
+  BecoSDKErrorCodeLocationDisabled = 7,
 /// Error code reported if Location Services is/has been enabled.
-  BecoSDKErrorCodeLocationEnabled = 7,
+  BecoSDKErrorCodeLocationEnabled = 8,
 };
 
 @class UserInfoReply;
@@ -246,17 +249,17 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// alternate hostnames appropriate for their environment.
 @property (nonatomic, copy) NSString * _Nonnull hostname;
 /// Use the Threshold Adjustment to adjust positioning sensitivity.
-/// We recommend using our default, set at ‘3’, however for applications
+/// We recommend using our default, set at ‘7’, however for applications
 /// that require the Beco Beacons to be installed in higher ceilings
 /// (5-6 meters), it will be necessary to increase the sensitivity level
 /// in order to ensure higher levels of location accuracy.
 /// The higher the ceiling, the higher this threshold should be.
-/// For other applications, such as placing a Beco Beacon on a desk
+/// For other applications, such as placing Beco Beacons on desks
 /// or other very close applications (less than 1 meter), you can
 /// decrease this value substantially in order to maintain
 /// location precision.
-/// The SDK internally configures this value to ‘3’.
-/// Acceptable values are from -20 to 50 with a nominal value of 3.
+/// The SDK internally configures this value to ‘5’.
+/// Acceptable values are from -20 to 50 with a nominal value of 5.
 @property (nonatomic) NSInteger thresholdAdjustment;
 /// This value controls the SDK data update rate in seconds.
 /// The update rate is the maximum time between callbacks to

@@ -37,6 +37,8 @@ This README provides installation and usage instructions for developers deployin
 
 ## Release Notes
 
+v1.0.3 _BETA_ - Updated Android API, iOS API.
+
 v1.0.2 _BETA_ - Updated Android API to v1.8.9.
 
 v1.0.1 _BETA_ - Updated Android API to v1.8.6.

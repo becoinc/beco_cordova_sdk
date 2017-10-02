@@ -68,7 +68,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     private CallbackContext onReportStartScanCompleteCallbackContext;
     
     private int refreshIntervalValue = 10;
-    private int thresholdAdjustmentValue = 3;
+    private int thresholdAdjustmentValue = 7;
     
     ////////////////////////////////////////////////
     // Cordova Plugin Implementation

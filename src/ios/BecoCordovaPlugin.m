@@ -97,7 +97,7 @@
     
     //Initialize basic tweak values to their defaults
     self->refreshIntervalValue = [NSNumber numberWithInt:10];
-    self->thresholdAdjustmentValue = [NSNumber numberWithInt:3];
+    self->thresholdAdjustmentValue = [NSNumber numberWithInt:5];
     
     //Pull ID from system since we are forcing usage of IDFV for cordova iOS
     hsid = [[UIDevice currentDevice] identifierForVendor];

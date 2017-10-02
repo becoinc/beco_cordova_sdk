@@ -18,6 +18,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile 'org.altbeacon:android-beacon-library:2.12.2'
     compile 'com.github.satyan:sugar:1.5'
+    // This is needed for the example apps to work.
+    compile 'com.android.support:support-v4:19.0.+'
     // ---- End Beco --------------------------------------------------
 }
 

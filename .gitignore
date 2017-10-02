@@ -4,3 +4,4 @@ resources/signing
 node_modules
 platforms
 plugins
+.idea/

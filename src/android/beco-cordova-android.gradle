@@ -16,7 +16,7 @@ dependencies {
     // Transitive Deps for the Beco SDK
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
-    compile 'org.altbeacon:android-beacon-library:2.8.1'
+    compile 'org.altbeacon:android-beacon-library:2.12.2'
     compile 'com.github.satyan:sugar:1.5'
     // ---- End Beco --------------------------------------------------
 }

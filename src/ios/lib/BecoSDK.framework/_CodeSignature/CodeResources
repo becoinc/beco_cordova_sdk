@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BecoSDK-Swift.h</key>
 		<data>
-		gcIyVHrARYIeElhNTrfNJ+XKF2k=
+		33idLokB5eY3pUh97hWZCi1giDs=
 		</data>
 		<key>Headers/BecoSDK.h</key>
 		<data>
@@ -14,39 +14,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		gWX/1Gcp2QK0p/O7LNUyATmiLbc=
+		aFPpkilM87w79XdvUDf0qhQ/6mQ=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
-		AU2Eh29/qTXV0q7iXNXVkOqbZAM=
+		LYrEaGCfJurYMsO8eO78UlJ7Pag=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		vjTsdsB4U+ENhr5XQOoUyg9MULA=
+		/OKQThT7gsGK9CMFaFB1UjPDz2w=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		Pq5LhSQrQ69fO0xQvP4/SEdB4Zs=
+		9zxsWxlYWuXl8/S/DiILRZfo5mA=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		I3J34suIMZl9VHmHUu7ePqSwv3M=
+		VHX5LlHx3hghEHhX49V/qny9oWw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		RLGV38jdi2iXe21y2vQK2pXCYNY=
+		X0aKN1/kzsYmFfTKjOtyYlfFGVo=
 		</data>
 		<key>SM.momd/SM.mom</key>
 		<data>
-		nZ2DyeZIW0yPtOCnbCUuU+guWFQ=
+		SOBJf85zDbF6ArNTXR3dxIDQBmA=
 		</data>
 		<key>SM.momd/SM.omo</key>
 		<data>
-		QCQQ/giFaBkgnOvKIB3IbXkC0zs=
+		1O3J2Y6ssSXQc5iCFka7Yi5vkOM=
 		</data>
 		<key>SM.momd/VersionInfo.plist</key>
 		<data>
-		yYnyJM5iHJe5ZoUwWIb0qImGpfA=
+		XnKo/KfwdFUJURZAgeL4Y+NhUbw=
 		</data>
 		<key>strip-frameworks.sh</key>
 		<data>
@@ -59,11 +59,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gcIyVHrARYIeElhNTrfNJ+XKF2k=
+			33idLokB5eY3pUh97hWZCi1giDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			uossVGdYDwXMYd/xa3NUPH6jvSKyodQ9mIEnio6WaGQ=
+			x9KW5sh+HDfd5X7WrXDNANwdrJkdPiDJ4a5+WjFUMhI=
 			</data>
 		</dict>
 		<key>Headers/BecoSDK.h</key>
@@ -81,88 +81,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AU2Eh29/qTXV0q7iXNXVkOqbZAM=
+			LYrEaGCfJurYMsO8eO78UlJ7Pag=
 			</data>
 			<key>hash2</key>
 			<data>
-			ACAbUV17kyh0e/fgg9XCJ8RzuwuAc462UI67SFeUmHM=
+			C0vsRF5mR1HzJhES4r8FQnV5JZwrnfF7cj7OQ11uHlA=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vjTsdsB4U+ENhr5XQOoUyg9MULA=
+			/OKQThT7gsGK9CMFaFB1UjPDz2w=
 			</data>
 			<key>hash2</key>
 			<data>
-			YuMfOW6duJXkUXOLIwoGPwwllXhuYaWE7hv8UV21TBc=
+			4qakQnBZ7lJQDhF5bwgJdJ+ZPbXpY4J2MDrRAYiJ0E8=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Pq5LhSQrQ69fO0xQvP4/SEdB4Zs=
+			9zxsWxlYWuXl8/S/DiILRZfo5mA=
 			</data>
 			<key>hash2</key>
 			<data>
-			iNuyIf9pEiCiLU9zlj29oVBT62PAyT1gl1L52nhsM0A=
+			0bOqE4lI42E87M2i4PgonPagSU7X57i8bHqaMV2gtWY=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			I3J34suIMZl9VHmHUu7ePqSwv3M=
+			VHX5LlHx3hghEHhX49V/qny9oWw=
 			</data>
 			<key>hash2</key>
 			<data>
-			NBMHp2EeT5x4mmlxJ2WgY+K4zncEkuIDSn1lCOdiFLU=
+			yvr3ZcB/uI8gzhm+3IzAl8H0OHyiGVkT2KNZcQUi71I=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RLGV38jdi2iXe21y2vQK2pXCYNY=
+			X0aKN1/kzsYmFfTKjOtyYlfFGVo=
 			</data>
 			<key>hash2</key>
 			<data>
-			qIxAIhDnweV6XQTkAdYMyIgHbbWxuGu3pTt++u1X2js=
+			zu2hR6fM//MAvWcwJ6nN1vSbCwldKHmOFRe9/jjU400=
 			</data>
 		</dict>
 		<key>SM.momd/SM.mom</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nZ2DyeZIW0yPtOCnbCUuU+guWFQ=
+			SOBJf85zDbF6ArNTXR3dxIDQBmA=
 			</data>
 			<key>hash2</key>
 			<data>
-			Vz7gJWYOZVacV6bGEiHyfWy+fK2Qe2fEf0jWMmAZVEo=
+			/aFOIiwoFWfqQDXw4UUZdnC7j814uzChYPr4JqwlPRI=
 			</data>
 		</dict>
 		<key>SM.momd/SM.omo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QCQQ/giFaBkgnOvKIB3IbXkC0zs=
+			1O3J2Y6ssSXQc5iCFka7Yi5vkOM=
 			</data>
 			<key>hash2</key>
 			<data>
-			xznQnwA8Me8SNGj5SUylMB94ag1lgans8pj42LWZh+k=
+			Loaz7wOs6L3rn8p3G3b5s7sDxyXl3upu4qVaZM2Vk7E=
 			</data>
 		</dict>
 		<key>SM.momd/VersionInfo.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yYnyJM5iHJe5ZoUwWIb0qImGpfA=
+			XnKo/KfwdFUJURZAgeL4Y+NhUbw=
 			</data>
 			<key>hash2</key>
 			<data>
-			QMpJp7SvYbgtZlMMw2WnsI2Y3hJU3p+OL4ThgZXCpQs=
+			vhswlsWCj+OJftTItqfPhH3ACbD/3ZFK9YFTL3wkhk0=
 			</data>
 		</dict>
 		<key>strip-frameworks.sh</key>

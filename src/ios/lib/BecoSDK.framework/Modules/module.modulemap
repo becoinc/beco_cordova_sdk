@@ -7,4 +7,5 @@ framework module BecoSDK {
 
 module BecoSDK.Swift {
     header "BecoSDK-Swift.h"
+    requires objc
 }

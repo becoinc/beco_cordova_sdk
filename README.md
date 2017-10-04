@@ -83,6 +83,12 @@ There are several platform-specific settings that must be configured to deploy a
 
 You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when requesting location permission.
 
+**Note:** On certain versions of iOS (i.e. 11) we've found that other keys are necessary for location permissions. 
+Beco strongly recommends using **all** the indicated privacy keys.
+
+These are shown in below in a snapshot from the XCode 9 Info.plist UI.
+![readme-guide-3](./readme-images/readme-guide-3.png) 
+
 *3.* You must enabled the **"Always Embed Swift Standard Libraries"** build flag.
 
 *4*. In order to work around an app store submission bug, documented here in Radar: http://www.openradar.me/radar?id=6409498411401216, you need to add the following shell script execution to the “Build Phases” section of your app build.

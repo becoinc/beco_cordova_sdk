@@ -6,27 +6,27 @@
 	<dict>
 		<key>Headers/XCGLogger-Swift.h</key>
 		<data>
-		x3UCqvwVmDeMIFKX7i2g2Lbxh7Y=
+		LNeq/uAehid3jB2VKFvtxQvTT4s=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		zFM9vSizDyMdR98U89t6ZJSAl8Q=
+		lxl4OAVeTjudE8CHi9D3P+/9JLg=
 		</data>
 		<key>Modules/XCGLogger.swiftmodule/i386.swiftdoc</key>
 		<data>
-		J/+TdYyqu/Gg+9UNusfK1gaN3LA=
+		EogBLX6TC7ryERKpTWi+WbruocY=
 		</data>
 		<key>Modules/XCGLogger.swiftmodule/i386.swiftmodule</key>
 		<data>
-		WmWWQ7EPuUhtY2iIeNO7DEFLXkI=
+		ZKG8ofaVbB8J+hZqXr/ET7A+ZYY=
 		</data>
 		<key>Modules/XCGLogger.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		PPDKK5hZrrYLaPzf9v7NwNpGPyM=
+		ybIsRa79r5jzY8fm1YLl9b0722s=
 		</data>
 		<key>Modules/XCGLogger.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		Uhod5NzN8bqDp5/fFY86KzdzrW0=
+		ptD+Gqf8dqhWiImR2PKo7/a3nJw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -39,55 +39,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			x3UCqvwVmDeMIFKX7i2g2Lbxh7Y=
+			LNeq/uAehid3jB2VKFvtxQvTT4s=
 			</data>
 			<key>hash2</key>
 			<data>
-			xxrxUAhMYGfxaMXpAb3Qn0oH2oIOBy0AgF6m1E/8Lpc=
+			E052jcNla3iFMz1Xua2gveokzFaIm9NmGOlNTwaG880=
 			</data>
 		</dict>
 		<key>Modules/XCGLogger.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			J/+TdYyqu/Gg+9UNusfK1gaN3LA=
+			EogBLX6TC7ryERKpTWi+WbruocY=
 			</data>
 			<key>hash2</key>
 			<data>
-			5FFqsquzr4SIJpYez5v2qdFqJitIPC+cPd77o2Atzv0=
+			V1MEh3DDtwZKgwJCmbOLTSoUqXbcqIcZTOjOH4ySYfQ=
 			</data>
 		</dict>
 		<key>Modules/XCGLogger.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WmWWQ7EPuUhtY2iIeNO7DEFLXkI=
+			ZKG8ofaVbB8J+hZqXr/ET7A+ZYY=
 			</data>
 			<key>hash2</key>
 			<data>
-			ezIFsM6SAHaK+hMJmACiRzLsV7ewNlDa65vK0BnzPYM=
+			9ZK+EP9DJ+oQhKZ7HYCocZ02xDiZ4X/ES89gWy6Qerk=
 			</data>
 		</dict>
 		<key>Modules/XCGLogger.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PPDKK5hZrrYLaPzf9v7NwNpGPyM=
+			ybIsRa79r5jzY8fm1YLl9b0722s=
 			</data>
 			<key>hash2</key>
 			<data>
-			GUZssrku7bIT17wZT5Qv5AhOZtoxW9gRwXu0oNoGqgk=
+			3d+SOF5fDQeLaLIPOlmJwMXl+1ta1H0wSG/5R8rP8h4=
 			</data>
 		</dict>
 		<key>Modules/XCGLogger.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Uhod5NzN8bqDp5/fFY86KzdzrW0=
+			ptD+Gqf8dqhWiImR2PKo7/a3nJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Zw/3+sMNZ0GM0FiuYFhgpsXk8OxBJG0n8ZVt6OW7LtM=
+			TVuskHLyw7++lcT9PusWAsokad2K9DSzcq2gJReB9z0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

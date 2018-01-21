@@ -38,6 +38,8 @@ This README provides installation and usage instructions for developers deployin
 
 ## Release Notes
 
+v1.0.4 _BETA_ - Updated Beco SDK for iOS to v3.5.9.
+
 v1.0.3 _BETA_ - Updated Beco SDK for Android to v1.9(12), Beco SDK for iOS to v3.4.0
 
 v1.0.2 _BETA_ - Updated Android API to v1.8.9.
@@ -84,11 +86,11 @@ There are several platform-specific settings that must be configured to deploy a
 
 You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when requesting location permission.
 
-**Note:** On certain versions of iOS (i.e. 11) we've found that other keys are necessary for location permissions. 
+**Note:** On certain versions of iOS (i.e. 11) we've found that other keys are necessary for location permissions.
 Beco strongly recommends using **all** the indicated privacy keys.
 
 These are shown in below in a snapshot from the XCode 9 Info.plist UI.
-![readme-guide-3](./readme-images/readme-guide-3.png) 
+![readme-guide-3](./readme-images/readme-guide-3.png)
 
 *3.* You must enabled the **"Always Embed Swift Standard Libraries"** build flag.
 
@@ -258,7 +260,7 @@ The SDK may report an unknown location for one of several reasons:
 
 * You may be out of the reliable range of your registered Beco Beacons.
 * The RF environment is such that your location is ambiguous. You are neither here nor there and the SDK is informing you of that situation.
-* The phone does not have an available Internet connection and you have changed locations. 
+* The phone does not have an available Internet connection and you have changed locations.
 
 The location data will be returned as a JS object, displayed here as JSON:
 
@@ -316,7 +318,7 @@ To start scanning for beacons, call the following command:
 ```javascript
 BecoCordovaPlugin.startScan();
 ```
-The Beco SDK will begin scanning for beacons in the background, and will periodically call the registered event callbacks. 
+The Beco SDK will begin scanning for beacons in the background, and will periodically call the registered event callbacks.
 
 >**In order for the SDK to function properly, you should call `startScan()` as soon as possible after your app has launched.**
 
@@ -400,7 +402,7 @@ BLE devices have limited Core Location support when in simulation. We’ve found
 #### Bluetooth Status
 
 Since the SDK does not interface with Bluetooth directly, using Bluetooth via the Location Services API, it will not be aware when Bluetooth is disabled. If the application is scanning with Bluetooth disabled, `onReceiveLocationData` will receive a `null` location value representing an unknown location.
-       
+
 It is up to the developer to ensure their UI/UX communicates to the user that Bluetooth be enabled, even though the App itself does not require Bluetooth permissions.
 
 Specifically on iOS, the SDK does not invoke `CBCentralManager` to detect the current phone Bluetooth enabled/disabled state. This is done to minimize user annoyance with OS pop-ups. In certain circumstances iOS will prompt the user to enable Bluetooth for Location services. If SDK customers wish to remind their app users about enabling Bluetooth, then they should invoke

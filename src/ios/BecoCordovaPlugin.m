@@ -30,17 +30,17 @@
 ////////////////////////////////////////////////
 
 @interface BecoCordovaPlugin : CDVPlugin <BecoSDKDelegate> {
-    
+
     //SDK instance
     BecoSDKInterface* sdk;
-    
+
     //Strings that encode the callback function IDs for event functions
     //These are called from the delegate functions in this class
     NSString* onReceiveLocationDataCallbackId;
     NSString* onReportErrorCallbackId;
     NSString* onReportAppHitCallbackId;
     NSString* onReportStartScanCompleteCallbackId;
-    
+
     //Tweak values, store a copy so we can return values via getters
     NSNumber* refreshIntervalValue;
     NSNumber* thresholdAdjustmentValue;
@@ -91,17 +91,17 @@
     //Initialize the Beco SDK
     self->sdk = [[BecoSDKInterface alloc]init];
     self->sdk.delegate = self;
-    
+
     //Set the default hostname to Beco Production.
     self->sdk.hostname = @"api.beco.io";
-    
+
     //Initialize basic tweak values to their defaults
     self->refreshIntervalValue = [NSNumber numberWithInt:10];
     self->thresholdAdjustmentValue = [NSNumber numberWithInt:5];
-    
-    //Pull ID from system since we are forcing usage of IDFV for cordova iOS
-    hsid = [[UIDevice currentDevice] identifierForVendor];
-    
+
+    //Pull HSID from the Beco plugin and cache it. User-specified HSIDs are deprecated.
+    hsid = [self->sdk getHSID];
+
     //Display a debug message
     //NSLog(@"[Beco SDK] Initialized Cordova Plugin.");
 }
@@ -120,10 +120,10 @@
     [self.commandDelegate runInBackground:^{
         //Start the scan
         [self->sdk startScanAndReturnError:nil];
-        
+
         //Display a debug message
         if (debug){ NSLog(@"[Beco SDK] Started scanning for beacons..."); }
-        
+
         //Send a default 'OK' result
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
@@ -140,10 +140,10 @@
     [self.commandDelegate runInBackground:^{
         //Stop the scan
         [self->sdk stopScan];
-        
+
         //Display a debug message
         if (debug){ NSLog(@"[Beco SDK] Stopped scanning for beacons.");}
-        
+
         //Send a default 'OK' result
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
@@ -160,47 +160,53 @@
     [self.commandDelegate runInBackground:^{
         //Send a default 'OK' result
         __block CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        
+
         //Display a debug message
         if (debug){ NSLog(@"[Beco SDK] Attempting to register handset...");}
-        
+
         //Gather parameters
-        NSUUID *handsetId = nil;
         NSString *userDataString = nil;
         NSString *personId = nil;
         NSString *groupId = nil;
-        
+
         @try {
             //Handle error here if the UUID is of an invalid format
             if ([command.arguments objectAtIndex:0] != [NSNull null]){
-                handsetId = [[NSUUID alloc] initWithUUIDString:[command.arguments objectAtIndex:0]];
+                // Manually specifying the handsetId on iOS does nothing, print a warning.
+                NSLog(@"[Beco SDK] Warning: User specification of handsetId is deprecated on iOS and will be ignored.")
             }
-            
+
             if ([command.arguments objectAtIndex:1] != [NSNull null]){
                 personId = [command.arguments objectAtIndex:1];
             }
-            
+
             if ([command.arguments objectAtIndex:2] != [NSNull null]){
                 groupId = [command.arguments objectAtIndex:2];
             }
-            
+
             if ([command.arguments objectAtIndex:3] != [NSNull null]){
                 userDataString = [command.arguments objectAtIndex:3];
             }
-            
+
             NSDictionary *userDataDict = @{
                                            @"userData" : StringOrEmpty(userDataString)
                                            };
-            
-            //handsetId is nil because we are forcing usage of IDFV
-            bool ignoredResult = [ self->sdk registerHandset: nil
+
+            // Bug fix for COR-7:
+            // Registering a handset with no personId specified should use their handsetId
+            // as their personId. Use hsid retrieved on initialization to fill personId.
+            if (personId == nil){
+                personId = [self->hsid UUIDString];
+            }
+
+            bool ignoredResult = [ self->sdk registerHandset: self->hsid
                                                     personId: personId
                                                      groupId: groupId
                                                     userData: [userDataDict mutableCopy]
                                                   completion: ^void( BOOL success, RegisterHandsetReply* data )
                                   {
                                       if (success){
-                                          
+
                                           if (data == nil) {
                                               result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Handset has already been registered, you only need to register a handset once. See the Beco Cordova User's Guide for details."];
                                               //Display a debug message
@@ -224,10 +230,10 @@
                                           if (debug){ NSLog(@"[Beco SDK] Failed to register handset!");}
                                           result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Failed to register handset. Please verify your API credentials have been set and registerHandset parameters are valid."];
                                       }
-                                      
+
                                       [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
                                   } ];
-            
+
         } @catch (NSException* exception){
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Failed to register handset. Invalid parameter set!"];
             if (debug){ NSLog(@"Exception Reason: %@ Callstack: %@",exception.reason,[exception callStackSymbols]);}
@@ -250,7 +256,7 @@
     [self.commandDelegate runInBackground:^{
         //Display debug message
         if (debug){ NSLog(@"[Beco SDK] Registering callback function for receiveLocationData event.");}
-        
+
         onReceiveLocationDataCallbackId = command.callbackId;
     }];
 }
@@ -265,7 +271,7 @@
     [self.commandDelegate runInBackground:^{
         //Display debug message
         if (debug){ NSLog(@"[Beco SDK] Registering callback function for reportError event.");}
-        
+
         onReportErrorCallbackId = command.callbackId;
     }];
 }
@@ -280,7 +286,7 @@
     [self.commandDelegate runInBackground:^{
         //Display debug message
         if (debug){ NSLog(@"[Beco SDK] Registering callback function for reportAppHit event.");}
-        
+
         onReportAppHitCallbackId = command.callbackId;
     }];
 }
@@ -295,7 +301,7 @@
     [self.commandDelegate runInBackground:^{
         //Display debug message
         if (debug){ NSLog(@"[Beco SDK] Registering callback function for startScanComplete event.");}
-        
+
         onReportStartScanCompleteCallbackId = command.callbackId;
     }];
 }
@@ -309,7 +315,7 @@
     [self.commandDelegate runInBackground:^{
         if (onReportErrorCallbackId != nil){
             //If we've set a callback ID for the 'report error' event, call it and return data.
-            
+
             //Build temporary array of error code strings
             NSArray *tempStatusArray = @[@"Credential Mismatch",
                                          @"Customer Not Found",
@@ -319,19 +325,19 @@
                                          @"Bluetooth Enabled",
                                          @"Location Services Disabled",
                                          @"Location Services Enabled"];
-            
+
             //encode error as JSON dictionary
             NSDictionary *messageDict = @{
                                           @"errorCode" : [NSNumber numberWithInt:error],
                                           @"errorString" : tempStatusArray[error]
                                           };
-            
+
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:messageDict];
             [result setKeepCallbackAsBool:YES]; //Set flag to keep the callback function so we can call it multiple times
-            
+
             //Display a debug message
             if (debug){ NSLog(@"[Beco SDK] Got reportError event. Calling callback function...");}
-            
+
             [self.commandDelegate sendPluginResult:result callbackId:onReportErrorCallbackId];
         }
     }];
@@ -341,19 +347,19 @@
 {
     [self.commandDelegate runInBackground:^{
         if (onReceiveLocationDataCallbackId != nil){
-            
+
             //Default OK result without any data attached
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-            
+
             //Attach data to result if the location returned isn't null
             if (locationData != nil){
                 NSString* becoId = locationData.becoId;
                 NSString* placeName = locationData.place.placeName;
                 NSString* locationName = locationData.place.location.locationName;
-                
+
                 NSNumber *locCapacity =[NSNumber numberWithInt:(uint32_t)locationData.place.capacity];
                 NSString *handsetId =[self->hsid UUIDString];
-                
+
                 NSDictionary *locDict = @{
                                           @"becoId" : StringOrEmpty(locationData.becoId),
                                           @"hsid" : StringOrEmpty(handsetId),
@@ -372,19 +378,19 @@
                                                           }
                                                   }
                                           };
-                
+
                 if (debug){ NSLog(@"[Beco SDK] Received Location Data: Beco Id: %@, Place: %@, Location: %@",becoId, placeName, locationName);}
-                
+
                 //Override default result to return the location data as a dictionary
                 result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:locDict];
             }
-            
+
             //Set flag to keep the callback function so we can call it multiple times
             [result setKeepCallbackAsBool:YES];
-            
+
             //Display a debug message
             if (debug){ NSLog(@"[Beco SDK] Got receiveLocationData event. Calling callback function...");}
-            
+
             //Send the result to the callback function
             [self.commandDelegate sendPluginResult:result callbackId:onReceiveLocationDataCallbackId];
         }
@@ -396,18 +402,18 @@
     [self.commandDelegate runInBackground:^{
         if (onReportAppHitCallbackId != nil){
             //If we've set a callback ID for the 'report app hit' event, call it and return data.
-            
+
             //Report app hit as a json dict, only return becoId
             NSDictionary *messageDict = @{
                                           @"becoId" : becoId
                                           };
-            
+
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:messageDict];
             [result setKeepCallbackAsBool:YES]; //Set flag to keep the callback function so we can call it multiple times
-            
+
             //Display a debug message
             if (debug){ NSLog(@"[Beco SDK] Got appHit event. Calling callback function...");}
-            
+
             [self.commandDelegate sendPluginResult:result callbackId:onReportAppHitCallbackId];
         }
     }];
@@ -418,7 +424,7 @@
     [self.commandDelegate runInBackground:^{
         if (onReportStartScanCompleteCallbackId != nil){
             //If we've set a callback ID for the 'report scan complete' event, call it and return data.
-            
+
             //Build temporary array of status string messages
             NSArray *tempStatusArray = @[@"Success",
                                          @"Location Unauthorized",
@@ -429,19 +435,19 @@
                                          @"Network Error",
                                          @"Credential Error",
                                          @"Already Scanning"];
-            
+
             //Send as JSON
             NSDictionary *messageDict = @{
                                           @"statusCode" : [NSNumber numberWithInt:reportStartScanComplete],
                                           @"statusString" : tempStatusArray[reportStartScanComplete]
                                           };
-            
+
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:messageDict];
             [result setKeepCallbackAsBool:YES]; //Set flag to keep the callback function so we can call it multiple times
-            
+
             //Display a debug message
             if (debug){ NSLog(@"[Beco SDK] Got startScanComplete event. Calling callback function...");}
-            
+
             [self.commandDelegate sendPluginResult:result callbackId:onReportStartScanCompleteCallbackId];
         }
     }];
@@ -461,25 +467,25 @@
     [self.commandDelegate runInBackground:^{
         //Configure OK result
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        
+
         @try {
             NSString *hostname = [command.arguments objectAtIndex:0]; //Get the hostname as a string
             NSString *username = [command.arguments objectAtIndex:1]; //Get the username as a string
             NSString *plainPw = [command.arguments objectAtIndex:2];  //Get the password as a string
             self->sdk.hostname = hostname; //Set the SDK hostname
             [self->sdk setCredentials:username plainPw:plainPw]; //Set the SDK credentials
-            
+
             //Display debug message
             if (debug){ NSLog(@"[Beco SDK] Set user API credentials.");}
         }
         @catch (NSException *exception) {
             //If there's an error, return a failure result.
             result =[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:exception.reason];
-            
+
             //Display debug message
             if (debug){ NSLog(@"[Beco SDK] Failed to set user API credentials! %@",exception.reason);}
         }
-        
+
         //Send the result to the passed callback function.
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
@@ -494,23 +500,23 @@
 {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        
+
         @try {
             NSInteger thresholdAdjustment = (NSInteger)[command.arguments objectAtIndex:0];
             self->sdk.thresholdAdjustment = thresholdAdjustment;
             self->thresholdAdjustmentValue = [NSNumber numberWithInt:(uint32_t)thresholdAdjustment];
-            
+
             //Display debug message
             if (debug){ NSLog(@"[Beco SDK] Set thresholdAdjustment tweak value.");}
         }
         @catch (NSException *exception) {
             //If there's an error, return a failure result.
             result =[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:exception.reason];
-            
+
             //Display debug message
             if (debug){ NSLog(@"[Beco SDK] Failed to set thresholdAdjustment tweak value! %@",exception.reason);}
         }
-        
+
         //Send the result to the passed callback function.
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
@@ -526,23 +532,23 @@
 {
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        
+
         @try {
             NSInteger refreshInterval = (NSInteger)[command.arguments objectAtIndex:0];
             self->sdk.refreshInterval = refreshInterval;
             self->refreshIntervalValue = [NSNumber numberWithInt:(uint32_t)refreshInterval];
-            
+
             //Display debug message
             if (debug){ NSLog(@"[Beco SDK] Set refreshInterval tweak value.");}
         }
         @catch (NSException *exception) {
             //If there's an error, return a failure result.
             result =[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:exception.reason];
-            
+
             //Display debug message
             if (debug){ NSLog(@"[Beco SDK] Failed to set refreshInterval tweak value! %@",exception.reason);}
         }
-        
+
         //Send the result to the passed callback function.
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
@@ -562,7 +568,7 @@
     [self.commandDelegate runInBackground:^{
         //Get the SDK version and return it as a string with the OK status
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[BecoSDKInterface getSDKVersion]];
-        
+
         //Send the result to the passed callback function.
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
@@ -578,7 +584,7 @@
     [self.commandDelegate runInBackground:^{
         //Send a default 'OK' result with the getter value
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsNSInteger:self->sdk.thresholdAdjustment];
-        
+
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
 }
@@ -606,7 +612,7 @@
 {
     [self.commandDelegate runInBackground:^{
         NSNumber* sdkState = [NSNumber numberWithInt:self->sdk.sdkState];
-        
+
         //Build temporary array of status string messages
         NSArray *tempStatusArray = @[@"Stopped",
                                      @"Starting",
@@ -615,16 +621,16 @@
                                      @"Loading from Cloud",
                                      @"Loading from Cloud Failed",
                                      @"Scanning"];
-        
+
         //Send as JSON
         NSDictionary *messageDict = @{
                                       @"statusCode" : sdkState,
                                       @"statusString" : tempStatusArray[[sdkState intValue]]
                                       };
-        
+
         //Send a default 'OK' result with the getter JSON response
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:messageDict];
-        
+
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
 }
@@ -637,8 +643,7 @@
 - (void)getHSID:(CDVInvokedUrlCommand*)command
 {
     [self.commandDelegate runInBackground:^{
-        //Send a default 'OK' result with the getter value, TODO send the result as JSON
-        //Just pull the IDFV straight from the system since we are forcing usage of IDFV on iOS
+        //Send a default 'OK' result with the getter value based on cached HSID, TODO send the result as JSON
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[self->hsid UUIDString]];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];

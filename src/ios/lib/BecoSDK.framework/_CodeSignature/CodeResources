@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BecoSDK-Swift.h</key>
 		<data>
-		33idLokB5eY3pUh97hWZCi1giDs=
+		35/DrgThIQ86PxSVbR2RZ2R5C1E=
 		</data>
 		<key>Headers/BecoSDK.h</key>
 		<data>
@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		aFPpkilM87w79XdvUDf0qhQ/6mQ=
+		Ly9GBk/L1UeW4mZiloQdxk04cy8=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
-		LYrEaGCfJurYMsO8eO78UlJ7Pag=
+		074Nnjf5X6X0MwS4W085FxUKsIE=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		/OKQThT7gsGK9CMFaFB1UjPDz2w=
+		rL90R7iopdSd6F14VW38OlTX8eo=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		9zxsWxlYWuXl8/S/DiILRZfo5mA=
+		42mwcTGEG6ssgroNQrQgLODi6sc=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		VHX5LlHx3hghEHhX49V/qny9oWw=
+		uif40hvmqGaiqeCzHIFhKQ9jswc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -38,15 +38,15 @@
 		</data>
 		<key>SM.momd/SM.mom</key>
 		<data>
-		SOBJf85zDbF6ArNTXR3dxIDQBmA=
+		MZABYzQXH7eVfwovsj94yF/WffA=
 		</data>
 		<key>SM.momd/SM.omo</key>
 		<data>
-		1O3J2Y6ssSXQc5iCFka7Yi5vkOM=
+		vj4gHeJXO2w8tSq54Vdi/rZkwWY=
 		</data>
 		<key>SM.momd/VersionInfo.plist</key>
 		<data>
-		XnKo/KfwdFUJURZAgeL4Y+NhUbw=
+		qoiL6ChKwoiv8eaqUAp21+qrzjY=
 		</data>
 		<key>strip-frameworks.sh</key>
 		<data>
@@ -59,11 +59,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			33idLokB5eY3pUh97hWZCi1giDs=
+			35/DrgThIQ86PxSVbR2RZ2R5C1E=
 			</data>
 			<key>hash2</key>
 			<data>
-			x9KW5sh+HDfd5X7WrXDNANwdrJkdPiDJ4a5+WjFUMhI=
+			wfyUcD1M6iXPehL6A8MamAOzpd76+UyQezvkShcXb+Y=
 			</data>
 		</dict>
 		<key>Headers/BecoSDK.h</key>
@@ -81,44 +81,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LYrEaGCfJurYMsO8eO78UlJ7Pag=
+			074Nnjf5X6X0MwS4W085FxUKsIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			C0vsRF5mR1HzJhES4r8FQnV5JZwrnfF7cj7OQ11uHlA=
+			7MAQY5QDBOEYaHBY5w1BuFiiX6SE/zhgYUkHxUJs6Vg=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/OKQThT7gsGK9CMFaFB1UjPDz2w=
+			rL90R7iopdSd6F14VW38OlTX8eo=
 			</data>
 			<key>hash2</key>
 			<data>
-			4qakQnBZ7lJQDhF5bwgJdJ+ZPbXpY4J2MDrRAYiJ0E8=
+			1JKy8QO0wR9lNsxu/IrOq1qSEBUItIFGEgg06am+V4c=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9zxsWxlYWuXl8/S/DiILRZfo5mA=
+			42mwcTGEG6ssgroNQrQgLODi6sc=
 			</data>
 			<key>hash2</key>
 			<data>
-			0bOqE4lI42E87M2i4PgonPagSU7X57i8bHqaMV2gtWY=
+			q2bM2d32aF1jkuc3yxALv+iYlmq4Ob+a8lay2lZTumY=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VHX5LlHx3hghEHhX49V/qny9oWw=
+			uif40hvmqGaiqeCzHIFhKQ9jswc=
 			</data>
 			<key>hash2</key>
 			<data>
-			yvr3ZcB/uI8gzhm+3IzAl8H0OHyiGVkT2KNZcQUi71I=
+			wVqTlPO0BTrrOWRFaQTfCb9GzhYoomuNpgu9GHzSfxU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -136,33 +136,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SOBJf85zDbF6ArNTXR3dxIDQBmA=
+			MZABYzQXH7eVfwovsj94yF/WffA=
 			</data>
 			<key>hash2</key>
 			<data>
-			/aFOIiwoFWfqQDXw4UUZdnC7j814uzChYPr4JqwlPRI=
+			804TRJtzWwLxgAnvOZeF+Ah17Ex3WHxkuT9QBdBtbxM=
 			</data>
 		</dict>
 		<key>SM.momd/SM.omo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1O3J2Y6ssSXQc5iCFka7Yi5vkOM=
+			vj4gHeJXO2w8tSq54Vdi/rZkwWY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Loaz7wOs6L3rn8p3G3b5s7sDxyXl3upu4qVaZM2Vk7E=
+			gnqmMfEgWZ48OOob+ve53L/KMPu3AUJAjnr4MK9289w=
 			</data>
 		</dict>
 		<key>SM.momd/VersionInfo.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XnKo/KfwdFUJURZAgeL4Y+NhUbw=
+			qoiL6ChKwoiv8eaqUAp21+qrzjY=
 			</data>
 			<key>hash2</key>
 			<data>
-			vhswlsWCj+OJftTItqfPhH3ACbD/3ZFK9YFTL3wkhk0=
+			1vXgczmKDbv2pC2tdFGF5c6GMxdJAO+LVzotfDCP6K0=
 			</data>
 		</dict>
 		<key>strip-frameworks.sh</key>

@@ -62,7 +62,7 @@ var BecoCordovaPlugin = {
     getVersion: function(cb){
         //Return the Cordova plugin version
         if (cb == undefined) { throw new Error("Please specify a callback function!"); }
-        cb("v1.0.3");
+        cb("v1.0.4");
     },
     getPlatformVersion: function(cb){
         //Return the platform API version

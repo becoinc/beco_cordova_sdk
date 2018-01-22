@@ -100,8 +100,8 @@
     self->thresholdAdjustmentValue = [NSNumber numberWithInt:5];
 
     //Pull HSID from the Beco plugin and cache it. User-specified HSIDs are deprecated.
-    hsid = [self->sdk getHSID];
-
+    hsid = [self->sdk currentHSID];
+    
     //Display a debug message
     //NSLog(@"[Beco SDK] Initialized Cordova Plugin.");
 }
@@ -173,7 +173,7 @@
             //Handle error here if the UUID is of an invalid format
             if ([command.arguments objectAtIndex:0] != [NSNull null]){
                 // Manually specifying the handsetId on iOS does nothing, print a warning.
-                NSLog(@"[Beco SDK] Warning: User specification of handsetId is deprecated on iOS and will be ignored.")
+                NSLog(@"[Beco SDK] Warning: User specification of handsetId is deprecated on iOS and will be ignored.");
             }
 
             if ([command.arguments objectAtIndex:1] != [NSNull null]){

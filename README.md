@@ -38,7 +38,7 @@ This README provides installation and usage instructions for developers deployin
 
 ## Release Notes
 
-v1.0.4 _BETA_ - Updated Beco SDK for iOS to v3.5.9.
+v1.0.4 _BETA_ - Updated Beco SDK for iOS to v3.5.12.
 
 v1.0.3 _BETA_ - Updated Beco SDK for Android to v1.9(12), Beco SDK for iOS to v3.4.0
 

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BecoSDK-Swift.h</key>
 		<data>
-		35/DrgThIQ86PxSVbR2RZ2R5C1E=
+		YKv5vS4FKSzpiPy/iZpCFFWLLVk=
 		</data>
 		<key>Headers/BecoSDK.h</key>
 		<data>
@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Ly9GBk/L1UeW4mZiloQdxk04cy8=
+		vCb62fx1ENnRQp96AmAmhps0GXE=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
-		074Nnjf5X6X0MwS4W085FxUKsIE=
+		LN3DY4KEmHXQaCVjXlFYRq6NxM8=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		rL90R7iopdSd6F14VW38OlTX8eo=
+		mysWZ4oIaCWf48Jm3CM+cw5yDTc=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		42mwcTGEG6ssgroNQrQgLODi6sc=
+		Bqqn4anWzDWny/SwUjTVK/HAdwE=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		uif40hvmqGaiqeCzHIFhKQ9jswc=
+		ceCA1cmA5Ksh0FXTiYVqkeOxJNM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -59,11 +59,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			35/DrgThIQ86PxSVbR2RZ2R5C1E=
+			YKv5vS4FKSzpiPy/iZpCFFWLLVk=
 			</data>
 			<key>hash2</key>
 			<data>
-			wfyUcD1M6iXPehL6A8MamAOzpd76+UyQezvkShcXb+Y=
+			IJLKf25DV7zedxuq5QtQTAQfR9wlcKJYV943g2lUvUo=
 			</data>
 		</dict>
 		<key>Headers/BecoSDK.h</key>
@@ -81,44 +81,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			074Nnjf5X6X0MwS4W085FxUKsIE=
+			LN3DY4KEmHXQaCVjXlFYRq6NxM8=
 			</data>
 			<key>hash2</key>
 			<data>
-			7MAQY5QDBOEYaHBY5w1BuFiiX6SE/zhgYUkHxUJs6Vg=
+			l3AjTzjgj5a7Sjncedu2j/O92tIEAT9/c0Z6oLR74nw=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rL90R7iopdSd6F14VW38OlTX8eo=
+			mysWZ4oIaCWf48Jm3CM+cw5yDTc=
 			</data>
 			<key>hash2</key>
 			<data>
-			1JKy8QO0wR9lNsxu/IrOq1qSEBUItIFGEgg06am+V4c=
+			vAni4NYyNJlc3vOpry4EYtSDj9ZS1RLDTgvFWtQGDCA=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			42mwcTGEG6ssgroNQrQgLODi6sc=
+			Bqqn4anWzDWny/SwUjTVK/HAdwE=
 			</data>
 			<key>hash2</key>
 			<data>
-			q2bM2d32aF1jkuc3yxALv+iYlmq4Ob+a8lay2lZTumY=
+			uAgwq+OIHBWd3it9TAMH08YT/xCbIkoIQmBMenZBWcI=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uif40hvmqGaiqeCzHIFhKQ9jswc=
+			ceCA1cmA5Ksh0FXTiYVqkeOxJNM=
 			</data>
 			<key>hash2</key>
 			<data>
-			wVqTlPO0BTrrOWRFaQTfCb9GzhYoomuNpgu9GHzSfxU=
+			yyXFQz8EEenZ4lGmOeLrsiUR7xRFtuoDtUEcqm4h94M=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

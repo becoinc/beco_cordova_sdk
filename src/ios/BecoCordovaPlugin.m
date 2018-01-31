@@ -192,13 +192,6 @@
                                            @"userData" : StringOrEmpty(userDataString)
                                            };
 
-            // Bug fix for COR-7:
-            // Registering a handset with no personId specified should use their handsetId
-            // as their personId. Use hsid retrieved on initialization to fill personId.
-            if (personId == nil){
-                personId = [self->hsid UUIDString];
-            }
-
             bool ignoredResult = [ self->sdk registerHandset: self->hsid
                                                     personId: personId
                                                      groupId: groupId

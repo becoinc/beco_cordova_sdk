@@ -273,12 +273,12 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// Gets information about the currently saved user credentials.
 /// This returns nil if the credentials have never been loaded
 /// from the server.
-@property (nonatomic, readonly, strong) UserInfoReply * _Nullable userInfo SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.userInfo' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, strong) UserInfoReply * _Nullable userInfo;
 /// Returns true if the currently saved user credentials indicate
 /// an administrator login.
 /// This returns ‘false’ if the credentials have never been loaded
 /// from the server.
-- (BOOL)getSDKUserRoleIsAdmin SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.getSDKUserRoleIsAdmin()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (BOOL)getSDKUserRoleIsAdmin SWIFT_WARN_UNUSED_RESULT;
 /// This is the interface to software external to the Beco SDK.
 /// Location data decoded by the server will be provided asynchronously
 /// to this callback. Delegate calls are performed using the
@@ -286,7 +286,7 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// The responses are Objects encapsulating the Beco REST API for
 /// easy use.
 /// If nil, the SDK will discard any server responses.
-@property (nonatomic, strong) id <BecoSDKDelegate> _Nullable delegate SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.delegate' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) id <BecoSDKDelegate> _Nullable delegate;
 /// This is the server hostname without protocol.
 /// The SDK assumes and sets the protocol to HTTPS internally. HTTP
 /// is not supported. The SDK also uses the default HTTPS port 443
@@ -294,7 +294,7 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// All public Beco Cloud users will set this to “api.beco.io”.
 /// Users with private instances of the Beco Cloud will use
 /// alternate hostnames appropriate for their environment.
-@property (nonatomic, copy) NSString * _Nonnull hostname SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.hostname' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nonnull hostname;
 /// Use the Threshold Adjustment to adjust positioning sensitivity.
 /// We recommend using our default, set at ‘7’, however for applications
 /// that require the Beco Beacons to be installed in higher ceilings
@@ -307,7 +307,7 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// location precision.
 /// The SDK internally configures this value to ‘5’.
 /// Acceptable values are from -20 to 50 with a nominal value of 5.
-@property (nonatomic) NSInteger thresholdAdjustment SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.thresholdAdjustment' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) NSInteger thresholdAdjustment;
 /// This value controls the SDK data update rate in seconds.
 /// The update rate is the maximum time between callbacks to
 /// the BecoSDKDelegate. After a callback is made on a location
@@ -315,20 +315,20 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// time interval set here and every interval thereafter.
 /// The SDK internally configures this value to 10.
 /// The valid range is 2 to 300 inclusive.
-@property (nonatomic) NSInteger refreshInterval SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.refreshInterval' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) NSInteger refreshInterval;
 /// This method is for Beco engineering use only.
-- (void)updateIgnoreThreshold:(NSInteger)threshold SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.updateIgnoreThreshold(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)updateIgnoreThreshold:(NSInteger)threshold;
 /// Gets the current state of the SDK.
-@property (nonatomic, readonly) enum BecoSDKState sdkState SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.sdkState' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) enum BecoSDKState sdkState;
 /// A convenience function for
 /// sdkState == .eBecoSdkStateScanning
 /// This is deprecated and you should replace it with a proper check
 /// for the expected/desired SDK State.
-- (BOOL)getSDKIsScanning SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.getSDKIsScanning()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (BOOL)getSDKIsScanning SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED;
 /// This method resets all internal settings to the Beco defined
 /// defaults.
 /// SDK users will generally not need to use this method.
-- (void)resetDefaults SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.resetDefaults()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)resetDefaults;
 /// Registers a handset for use with the Beco Occupancy API.
 /// This is equivalent to a call using the /handsets/register REST API call
 /// as documented at https://dev.beco.io/docs/appregister
@@ -366,7 +366,7 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// returns:
 /// A boolean indicating that the request started or not. If the
 /// request is started, then the completion handler will be called after completion.
-- (BOOL)registerHandset:(NSUUID * _Nullable)idfa personId:(NSString * _Nullable)personId groupId:(NSString * _Nullable)groupId userData:(NSDictionary * _Nullable)userData completion:(void (^ _Nullable)(BOOL, RegisterHandsetReply * _Nullable))completion SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.registerHandset(_:personId:groupId:userData:completion:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (BOOL)registerHandset:(NSUUID * _Nullable)idfa personId:(NSString * _Nullable)personId groupId:(NSString * _Nullable)groupId userData:(NSDictionary * _Nullable)userData completion:(void (^ _Nullable)(BOOL, RegisterHandsetReply * _Nullable))completion SWIFT_WARN_UNUSED_RESULT;
 /// Sets the server credentials for using the Beco REST API.
 /// These credentials are used as part of HTTP Basic authentication
 /// to access the Beco REST API server.
@@ -381,7 +381,7 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 ///
 /// \param plainPw The plain text password used to access the Beco REST API.
 ///
-- (void)setCredentials:(NSString * _Nonnull)username plainPw:(NSString * _Nonnull)plainPw SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.setCredentials(_:plainPw:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)setCredentials:(NSString * _Nonnull)username plainPw:(NSString * _Nonnull)plainPw;
 /// A request to start scanning for Beco Beacons.
 /// Preconditions:
 /// <ul>
@@ -396,24 +396,24 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 ///
 /// throws:
 /// <code>InvalidCredentialsException.NotSet</code> if the username/password are unset.
-- (BOOL)startScanAndReturnError:(NSError * _Nullable * _Nullable)error SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.startScan()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (BOOL)startScanAndReturnError:(NSError * _Nullable * _Nullable)error;
 /// Stops all operations.
-- (void)stopScan SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.stopScan()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)stopScan;
 /// Gets the version identifier string for this SDK release.
 /// The version identifier string follows semantic versioning.
 /// https://www.semver.org
-+ (NSString * _Nonnull)getSDKVersion SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.getSDKVersion()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
++ (NSString * _Nonnull)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
 /// Force a location change report of the current location
 /// from the SDK to the BecoSDKDelegate.
 /// \param id An optional identifier of the last known location.
 ///
-- (void)pushLocationChange:(NSString * _Nullable)id SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.pushLocationChange(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)pushLocationChange:(NSString * _Nullable)id;
 /// Return a list of all known active beacons found since
 /// the last “clearBeaconList()” call.
-- (NSArray<NSString *> * _Nonnull)getBeaconList SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.getBeaconList()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (NSArray<NSString *> * _Nonnull)getBeaconList SWIFT_WARN_UNUSED_RESULT;
 /// Clear the list of active beacons returned from a
 /// “getBeaconList()” call.
-- (void)clearBeaconList SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.clearBeaconList()' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)clearBeaconList;
 /// Gets a string for a given BecoID that describes the beacon’s status.
 /// \param id An identifier for the beacon.
 ///
@@ -421,7 +421,7 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 /// returns:
 /// A string with detailed status on the given beacon
 /// or an empty string “” on an error.
-- (NSString * _Nonnull)getBecoDescription:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.getBecoDescription(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (NSString * _Nonnull)getBecoDescription:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
 /// Gets a Beacon for a given BecoID.
 /// \param id An identifier for the beacon.
 ///
@@ -435,11 +435,11 @@ SWIFT_CLASS("_TtC7BecoSDK16BecoSDKInterface")
 ///     When nil, the SDK is reporting the location as unknown.
 ///   </li>
 /// </ul>
-- (LocationData * _Nullable)getBeacon:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'BecoSDKInterface.getBeacon(_:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (LocationData * _Nullable)getBeacon:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
 /// Gets the current HSID.
 /// This returns nil if the credentials have never been loaded
 /// from the server.
-@property (nonatomic, readonly, copy) NSUUID * _Nullable currentHSID SWIFT_DEPRECATED_OBJC("Swift property 'BecoSDKInterface.currentHSID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSUUID * _Nullable currentHSID;
 @end
 
 /// The result status of the start scan operation ‘startScan()’.
@@ -528,7 +528,7 @@ SWIFT_CLASS("_TtC7BecoSDK19CustomerSdkSettings")
 /// A smaller value will result in lower latency, but higher battery use.
 /// The valid range is from 5 seconds to 300 seconds. The default is 60
 /// if not set by the server.
-@property (nonatomic) NSInteger bgHbFlushTimeSec SWIFT_DEPRECATED_OBJC("Swift property 'CustomerSdkSettings.bgHbFlushTimeSec' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) NSInteger bgHbFlushTimeSec;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -537,10 +537,10 @@ SWIFT_CLASS("_TtC7BecoSDK19CustomerSdkSettings")
 SWIFT_CLASS("_TtC7BecoSDK5Floor")
 @interface Floor : NSObject
 /// The unique identifier for this floor.
-@property (nonatomic, copy) NSUUID * _Null_unspecified floorId SWIFT_DEPRECATED_OBJC("Swift property 'Floor.floorId' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSUUID * _Null_unspecified floorId;
 /// The user-provided name of the floor. Treated as a string,
 /// but the check-in app only allows -10 to 10 as integer values.
-@property (nonatomic, copy) NSString * _Nullable name SWIFT_DEPRECATED_OBJC("Swift property 'Floor.name' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable name;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -561,27 +561,27 @@ SWIFT_CLASS("_TtC7BecoSDK8Location")
 ///
 /// \param right The second location.
 ///
-+ (BOOL)SortByName:(Location * _Nonnull)left right:(Location * _Nonnull)right SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift method 'Location.SortByName(_:right:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
++ (BOOL)SortByName:(Location * _Nonnull)left right:(Location * _Nonnull)right SWIFT_WARN_UNUSED_RESULT;
 /// The unique id for this location.
-@property (nonatomic, copy) NSUUID * _Null_unspecified locationId SWIFT_DEPRECATED_OBJC("Swift property 'Location.locationId' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSUUID * _Null_unspecified locationId;
 /// The user-provided name for this location. May be nil.
-@property (nonatomic, copy) NSString * _Nullable locationName SWIFT_DEPRECATED_OBJC("Swift property 'Location.locationName' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable locationName;
 /// The address associated with this location.
 /// Reserved for future use. Will always be nil.
-@property (nonatomic, strong) id _Nullable address SWIFT_DEPRECATED_OBJC("Swift property 'Location.address' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) id _Nullable address;
 /// The number of hours of operation associated with this
 /// location.
 /// This field is deprecated and will be removed in a future version.
 /// The SDK will always return 24 and the field is not settable.
-@property (nonatomic, readonly) NSInteger locationHours SWIFT_DEPRECATED_OBJC("Swift property 'Location.locationHours' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) NSInteger locationHours;
 /// The capacity in number of people of this location.
 /// A value of -1 indicates that this information in unavailable.
-@property (nonatomic) NSInteger capacity SWIFT_DEPRECATED_OBJC("Swift property 'Location.capacity' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) NSInteger capacity;
 /// Creates a Location object from a json dictionary.
 /// \param fromJson A dictionary, parsed from a JSON representation of this
 /// object.
 ///
-- (nullable instancetype)initFromJson:(NSDictionary * _Nonnull)fromJson OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'Location.init(fromJson:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nullable instancetype)initFromJson:(NSDictionary * _Nonnull)fromJson OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -599,19 +599,18 @@ SWIFT_CLASS("_TtC7BecoSDK8Location")
 /// who may be interested in it.
 SWIFT_CLASS("_TtC7BecoSDK12LocationData")
 @interface LocationData : NSObject
-@property (nonatomic, readonly) NSInteger version SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.version' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, copy) NSString * _Nonnull becoId SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.becoId' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, copy) NSUUID * _Nonnull proximityUUID SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.proximityUUID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly) uint16_t trueMajor SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.trueMajor' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly) uint16_t trueMinor SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.trueMinor' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, copy) NSString * _Nonnull redirectURL SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.redirectURL' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, strong) Place * _Nullable place SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.place' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, copy) NSUUID * _Nullable originalPlace SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.originalPlace' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly, copy) NSArray<NSNumber *> * _Nonnull secure SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.secure' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly) NSInteger sensitivity SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.sensitivity' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger scDefaultSensitivity SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.scDefaultSensitivity' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");)
-+ (NSInteger)scDefaultSensitivity SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.scDefaultSensitivity' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-@property (nonatomic, readonly) BOOL occupancy SWIFT_DEPRECATED_OBJC("Swift property 'LocationData.occupancy' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) NSInteger version;
+@property (nonatomic, readonly, copy) NSString * _Nonnull becoId;
+@property (nonatomic, readonly, copy) NSUUID * _Nonnull proximityUUID;
+@property (nonatomic, readonly) uint16_t trueMajor;
+@property (nonatomic, readonly) uint16_t trueMinor;
+@property (nonatomic, readonly, copy) NSString * _Nonnull redirectURL;
+@property (nonatomic, readonly, strong) Place * _Nullable place;
+@property (nonatomic, readonly, copy) NSUUID * _Nullable originalPlace;
+@property (nonatomic, readonly, copy) NSArray<NSNumber *> * _Nonnull secure;
+@property (nonatomic, readonly) NSInteger sensitivity;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger scDefaultSensitivity;)
++ (NSInteger)scDefaultSensitivity SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -620,25 +619,25 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger scDefaultS
 SWIFT_CLASS("_TtC7BecoSDK5Place")
 @interface Place : NSObject
 /// The unique identifier for this place.
-@property (nonatomic, copy) NSUUID * _Null_unspecified placeId SWIFT_DEPRECATED_OBJC("Swift property 'Place.placeId' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSUUID * _Null_unspecified placeId;
 /// The name of this place. Can be nil if unset.
-@property (nonatomic, copy) NSString * _Nullable placeName SWIFT_DEPRECATED_OBJC("Swift property 'Place.placeName' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable placeName;
 /// The floor this place is located. Can be nil if no floor was
 /// set during checkin.
-@property (nonatomic, strong) Floor * _Nullable floor SWIFT_DEPRECATED_OBJC("Swift property 'Place.floor' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) Floor * _Nullable floor;
 /// Generic user defined comments about this place. Usually nil.
-@property (nonatomic, copy) NSString * _Nullable comments SWIFT_DEPRECATED_OBJC("Swift property 'Place.comments' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable comments;
 /// The location containing this place.
 /// A beacon which is not yet checked in may have a null location.
-@property (nonatomic, strong) Location * _Nullable location SWIFT_DEPRECATED_OBJC("Swift property 'Place.location' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) Location * _Nullable location;
 /// The capacity of this place.
 /// If the capacity has not been set the value -1 is used.
-@property (nonatomic) NSInteger capacity SWIFT_DEPRECATED_OBJC("Swift property 'Place.capacity' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) NSInteger capacity;
 /// Creates a Place object from a json dictionary.
 /// \param fromJson A dictionary, parsed from a JSON representation of this
 /// object.
 ///
-- (nullable instancetype)initFromJson:(NSDictionary * _Nonnull)fromJson OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_OBJC("Swift initializer 'Place.init(fromJson:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (nullable instancetype)initFromJson:(NSDictionary * _Nonnull)fromJson OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -648,19 +647,19 @@ SWIFT_CLASS("_TtC7BecoSDK5Place")
 SWIFT_CLASS("_TtC7BecoSDK20RegisterHandsetReply")
 @interface RegisterHandsetReply : NSObject
 /// The handset identifier.
-@property (nonatomic, copy) NSUUID * _Nonnull becoHSID SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.becoHSID' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSUUID * _Nonnull becoHSID;
 /// The ID for Advertising.
 /// This is Apple’s IDFA provided by the iOS API.
 /// On Android devices, this will be the AAID.
 /// Apps which use the BecoSDK for advertising purposes should
 /// retrive this field from ASIdentifierManager in the Ad Suport Framework.
 /// See: https://developer.apple.com/library/ios/documentation/DeviceInformation/Reference/AdSupport_Framework/index.html
-@property (nonatomic, copy) NSUUID * _Nullable idfa SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.idfa' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSUUID * _Nullable idfa;
 /// The date and time this handset was created in milliseconds since
 /// 1-Jan-1970 00:00:00 UTC.
-@property (nonatomic) uint64_t created SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.created' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic) uint64_t created;
 /// The date this handset was created.
-@property (nonatomic, readonly, copy) NSDate * _Nonnull createdDate SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.createdDate' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSDate * _Nonnull createdDate;
 /// The person identifier.
 /// This is a unique identifer assigned by an SDK developer to
 /// group together handsets belonging to a single person.
@@ -668,18 +667,18 @@ SWIFT_CLASS("_TtC7BecoSDK20RegisterHandsetReply")
 /// devices running Beco and therefore data related to that person
 /// should be aggregated by the system, which the Beco backend is
 /// able to do.
-@property (nonatomic, copy) NSString * _Nullable personId SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.personId' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable personId;
 /// The group identifier.
 /// This is a unique identifier assigned by an SDK developer
 /// to group together personIds in a meaningful way.
 /// For example: a person who is a member of the Marketing
 /// department could us “Marketing” as the groupId.
-@property (nonatomic, copy) NSString * _Nullable groupId SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.groupId' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable groupId;
 /// Any generic metadata that was specified to be associated
 /// with the handset when it was created.
 /// This is SDK developer provided JSON information and is
 /// entirely arbitrary.
-@property (nonatomic, strong) NSDictionary * _Nullable userData SWIFT_DEPRECATED_OBJC("Swift property 'RegisterHandsetReply.userData' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, strong) NSDictionary * _Nullable userData;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -692,7 +691,7 @@ SWIFT_CLASS("_TtC7BecoSDK20RegisterHandsetReply")
 SWIFT_CLASS("_TtC7BecoSDK4Role")
 @interface Role : NSObject
 /// The text form of the role name.
-@property (nonatomic, copy) NSString * _Null_unspecified roleName SWIFT_DEPRECATED_OBJC("Swift property 'Role.roleName' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Null_unspecified roleName;
 /// Generates a human readable string equivalent of this role.
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 /// Implementation of Hashable
@@ -710,18 +709,18 @@ SWIFT_CLASS("_TtC7BecoSDK4Role")
 SWIFT_CLASS("_TtC7BecoSDK13UserInfoReply")
 @interface UserInfoReply : NSObject
 /// The login name of the user.
-@property (nonatomic, copy) NSString * _Null_unspecified userName SWIFT_DEPRECATED_OBJC("Swift property 'UserInfoReply.userName' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Null_unspecified userName;
 /// The Roles assigned to this user.
 /// Roles are used to grant permissions to users to perform certain
 /// actions.
-@property (nonatomic, copy) NSSet<Role *> * _Nonnull roles SWIFT_DEPRECATED_OBJC("Swift property 'UserInfoReply.roles' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSSet<Role *> * _Nonnull roles;
 /// A date object representing the same time as the dateCreatedms.
-@property (nonatomic, readonly, copy) NSDate * _Nonnull dateCreated SWIFT_DEPRECATED_OBJC("Swift property 'UserInfoReply.dateCreated' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly, copy) NSDate * _Nonnull dateCreated;
 /// True if the user has admin authority. Admin users are
 /// allowed to check-in and edit beacons.
 /// Normal users only provide location or collect analytics data,
 /// depending on the account settings.
-@property (nonatomic, readonly) BOOL isAdmin SWIFT_DEPRECATED_OBJC("Swift property 'UserInfoReply.isAdmin' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, readonly) BOOL isAdmin;
 /// A human readable representation of this object.
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;

@@ -313,6 +313,7 @@
             NSArray *tempStatusArray = @[@"Credential Mismatch",
                                          @"Customer Not Found",
                                          @"Rate Limit Exceeded",
+                                         @"Problem Executing Server Command",
                                          @"Server Communication Failure",
                                          @"Bluetooth Disabled",
                                          @"Bluetooth Enabled",

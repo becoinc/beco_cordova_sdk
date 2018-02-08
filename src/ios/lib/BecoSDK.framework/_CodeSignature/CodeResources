@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		vCb62fx1ENnRQp96AmAmhps0GXE=
+		XEpWbtPiiiE++LtwKlnJD0v5PzI=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
-		LN3DY4KEmHXQaCVjXlFYRq6NxM8=
+		W3cZbk0P0bVjJm604V00cori6ZI=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		mysWZ4oIaCWf48Jm3CM+cw5yDTc=
+		+KLmkYuoEU4R+7wzeYEmDH/O59c=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		Bqqn4anWzDWny/SwUjTVK/HAdwE=
+		B52kuEHUX4ag0aYaXwWlAkVR72Q=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		ceCA1cmA5Ksh0FXTiYVqkeOxJNM=
+		t2VeIv93PqblEEklh1QTgnCWhG4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -81,44 +81,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LN3DY4KEmHXQaCVjXlFYRq6NxM8=
+			W3cZbk0P0bVjJm604V00cori6ZI=
 			</data>
 			<key>hash2</key>
 			<data>
-			l3AjTzjgj5a7Sjncedu2j/O92tIEAT9/c0Z6oLR74nw=
+			YnuCabeLts7STcM+/6QmZH7Ui0+nh2Vz3L01H1VU2ms=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mysWZ4oIaCWf48Jm3CM+cw5yDTc=
+			+KLmkYuoEU4R+7wzeYEmDH/O59c=
 			</data>
 			<key>hash2</key>
 			<data>
-			vAni4NYyNJlc3vOpry4EYtSDj9ZS1RLDTgvFWtQGDCA=
+			UzaYXbiJGx6UKBfNgINq7TRUYAFQl3nrG50BB977+Sg=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Bqqn4anWzDWny/SwUjTVK/HAdwE=
+			B52kuEHUX4ag0aYaXwWlAkVR72Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			uAgwq+OIHBWd3it9TAMH08YT/xCbIkoIQmBMenZBWcI=
+			huW1LDOfaVlq8I4TNHjf1na1sEt0g/T4eCiJZe/jdNk=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ceCA1cmA5Ksh0FXTiYVqkeOxJNM=
+			t2VeIv93PqblEEklh1QTgnCWhG4=
 			</data>
 			<key>hash2</key>
 			<data>
-			yyXFQz8EEenZ4lGmOeLrsiUR7xRFtuoDtUEcqm4h94M=
+			sSsiO7SHYCeK0uzSc//qoRsMAaVHn9C4g0OAn43XBr0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

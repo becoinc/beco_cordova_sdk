@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		XEpWbtPiiiE++LtwKlnJD0v5PzI=
+		F4R4YLrvA5OmUaFXUb8fFIWJkzE=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		+KLmkYuoEU4R+7wzeYEmDH/O59c=
+		3MqvvtHZP/vnowy4rcGGHbOGGb0=
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		t2VeIv93PqblEEklh1QTgnCWhG4=
+		DQCrKO5u4xd2CZZ6vpO8C2rbVmk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -92,11 +92,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+KLmkYuoEU4R+7wzeYEmDH/O59c=
+			3MqvvtHZP/vnowy4rcGGHbOGGb0=
 			</data>
 			<key>hash2</key>
 			<data>
-			UzaYXbiJGx6UKBfNgINq7TRUYAFQl3nrG50BB977+Sg=
+			wIWGfBoB5/suQ1vB7a1TFcqHiG4U32kTTygMGdp2hIE=
 			</data>
 		</dict>
 		<key>Modules/BecoSDK.swiftmodule/x86_64.swiftdoc</key>
@@ -114,11 +114,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			t2VeIv93PqblEEklh1QTgnCWhG4=
+			DQCrKO5u4xd2CZZ6vpO8C2rbVmk=
 			</data>
 			<key>hash2</key>
 			<data>
-			sSsiO7SHYCeK0uzSc//qoRsMAaVHn9C4g0OAn43XBr0=
+			NQF53rY6jX27AwEYLmJgzoCfPU2/kY07fAYNX7otRSQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

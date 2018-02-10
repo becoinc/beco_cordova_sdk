@@ -38,6 +38,8 @@ This README provides installation and usage instructions for developers deployin
 
 ## Release Notes
 
+v1.0.5 _BETA_ - Updated Beco SDK for iOS to v3.5.15. Note: The "Server Parsing Error" return value has been added for the 'onReportError' callback function. See "Using the SDK" section of this document.
+
 v1.0.4 _BETA_ - Updated Beco SDK for iOS to v3.5.12.
 
 v1.0.3 _BETA_ - Updated Beco SDK for Android to v1.9(12), Beco SDK for iOS to v3.4.0
@@ -52,7 +54,7 @@ v1.0.0 _BETA_ - Initial release of the Beco Cordova SDK. Includes support for An
 The Beco Cordova SDK has been tested using Apache Cordova version 7.0.1.
 
 #### iOS Device Requirements
-The Beco SDK for iOS requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running at least iOS 9.0. We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 9.3.x and 10.3. We expect other iOS devices and versions to work similarly, but they have not been tested by Beco. The SDK has been built with Universal (iPhone® and iPad®) support.
+The Beco SDK for iOS requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running at least iOS 9.0. We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 9.3.x, 10.3 and 11.x. We expect other iOS devices and versions to work similarly, but they have not been tested by Beco. The SDK has been built with Universal (iPhone® and iPad®) support.
 
 #### Android Device Requirements
 The Beco SDK for Android requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible Android device with Android Lollipop (5.0), API Level 21+. Beco strongly recommends devices running Android 6.0.1 (Marshmallow, API 23) or later due to substantial Bluetooth bugs in older versions of the operating system. We observe that that Android does frequently exhibit device and OS specific behavior and interested parties should contact us for further details.
@@ -305,11 +307,12 @@ The following errors may occur:
 |0|Credential Mismatch|The SDK Credentials specified do not match the beacon scanned.|
 |1|Customer Not Found|The SDK Credentials specified were not found as a customer.|
 |2|Rate Limit Exceeded|The server has reported a rate limit violation.|
-|3|Server Communication failure|There was a problem communicating with the Beco Cloud Services.|
-|4|Bluetooth Disabled|Bluetooth has been disabled. This event will not fire with the current API version (See "Nuances")|
-|5|Bluetooth Enabled|Bluetooth has been reenabled. This event will not fire with the current API version (See "Nuances")|
-|6|Location Disabled|Location Services have been disabled.|
-|7|Location Enabled|Location Services have been reenabled.|
+|3|Server Parsing Error|There was a problem with the Beco Cloud Services executing a command.|
+|4|Server Communication failure|There was a problem communicating with the Beco Cloud Services.|
+|5|Bluetooth Disabled|Bluetooth has been disabled. This event will not fire with the current API version (See "Nuances")|
+|6|Bluetooth Enabled|Bluetooth has been reenabled. This event will not fire with the current API version (See "Nuances")|
+|7|Location Disabled|Location Services have been disabled.|
+|8|Location Enabled|Location Services have been reenabled.|
 
 #### 4) Start/Stop Scanning
 

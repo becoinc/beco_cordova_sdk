@@ -138,7 +138,7 @@ Alternately, you can directly set the `<uses-sdk>` tag in the `AndroidManifest.x
 directly.
 ex:
 ```xml
-    <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="23" />
+    <uses-sdk android:minSdkVersion="22" android:targetSdkVersion="23" />
 ```
 
 *2*. Android's recent changes to the Permissions system require the application to request permissions at runtime,

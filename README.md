@@ -124,12 +124,22 @@ you need to add the following shell script execution to the “Build Phases” s
 #### Android Project Configuration
 There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android.
 
-*1*. Change the `minSdkVersion` and `targetSdkVersion` in AndroidManifest.xml to 22 and 23 respectively, as shown below:
+*1*. Ensure that the `Android` section of your `config.xml` includes the proper
+tags to set the `AndroidManifest.xml` SDK versions:
 ```xml
-    <uses-sdk android:minSdkVersion="22" android:targetSdkVersion="23" />
+<platform name="android">
+    <allow-intent href="market:*" />
+    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="23" />
+</platform>
 ```
-It is preferable, as demonstrated in the example apps, to set this in your
-`config.xml` file for your app and let the cordova tooling generate this.
+
+Alternately, you can directly set the `<uses-sdk>` tag in the `AndroidManifest.xml`
+directly.
+ex:
+```xml
+    <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="23" />
+```
 
 *2*. Android's recent changes to the Permissions system require the application to request permissions at runtime,
  which is outside the scope of the Beco Cordova SDK. The SDK requires the `ACCESS_COARSE_LOCATION` permission.

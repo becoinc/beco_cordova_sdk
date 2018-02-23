@@ -64,7 +64,7 @@ We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air
 We expect other iOS devices and versions to work similarly, but they have not been tested by Beco.
 The SDK has been built with Universal (iPhone® and iPad®) support.
 
-Releases after v1.0.4 _BETA_ deprecate support for iOS 9.x.
+Releases after v1.0.5 _BETA_ deprecate support for iOS 9.x.
 
 #### Android Device Requirements
 The Beco SDK for Android requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible
@@ -74,7 +74,7 @@ Bluetooth bugs in older versions of the operating system.
 We observe that that Android does frequently exhibit device and OS specific behavior and
 interested parties should contact us for further details.
 
-Releases after v1.0.4 _BETA_ deprecate support for Android versions prior to API 22.
+Releases after v1.0.5 _BETA_ deprecate support for Android versions prior to API 22.
 
 ## Installation
 

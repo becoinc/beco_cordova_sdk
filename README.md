@@ -1,5 +1,3 @@
-
-
 # ![Beco Logo](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/beco-logo-tiny.png) Beco Cordova SDK
 _An Apache Cordova version of the Beco SDK with Android and iOS support._
 
@@ -31,12 +29,16 @@ This README provides installation and usage instructions for developers deployin
     - [Bluetooth Status](#bluetooth-status)
     - [Long-Term Analytics](#long-term-analytics)
 - [Example Application](#example-application)
+- [Developing](#developing)
 - [Legal](#legal)
     - [License](#license)
     - [Export Statement](#export-statement)
     - [Trademark Notes](#trademark-notes)
 
 ## Release Notes
+
+v1.0.6 _BETA_ - Updated Beco Android SDK to v1.9 (13). This deprecates support for iOS prior to 10
+and Android versions prior to API 22. Expanded Documentation.
 
 v1.0.5 _BETA_ - Updated Beco SDK for iOS to v3.5.15. Note: The "Server Parsing Error" return value has been added for the 'onReportError' callback function. See "Using the SDK" section of this document.
 
@@ -48,25 +50,40 @@ v1.0.2 _BETA_ - Updated Android API to v1.8.9.
 
 v1.0.1 _BETA_ - Updated Android API to v1.8.6.
 
-v1.0.0 _BETA_ - Initial release of the Beco Cordova SDK. Includes support for Android and iOS. This version of the plugin supports realtime location data and long-term analytics data collection. The plugin is currently in BETA, and functionality may change in future releases.
+v1.0.0 _BETA_ - Initial release of the Beco Cordova SDK. Includes support for Android and iOS.
+This version of the plugin supports realtime location data and long-term analytics data collection.
+The plugin is currently in BETA, and functionality may change in future releases.
 
 ## Prerequisites
-The Beco Cordova SDK has been tested using Apache Cordova version 7.0.1.
+The Beco Cordova SDK has been tested using Apache Cordova version 8.0.0.
 
 #### iOS Device Requirements
-The Beco SDK for iOS requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running at least iOS 9.0. We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 9.3.x, 10.3 and 11.x. We expect other iOS devices and versions to work similarly, but they have not been tested by Beco. The SDK has been built with Universal (iPhone® and iPad®) support.
+The Beco SDK for iOS requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible iOS device running
+at least iOS 10.0.
+We have tested extensively on the iPhone 5s, iPhone 6/6+, iPad Mini and iPad Air 2 on both iOS 10.x and 11.x.
+We expect other iOS devices and versions to work similarly, but they have not been tested by Beco.
+The SDK has been built with Universal (iPhone® and iPad®) support.
+
+Releases after v1.0.4 _BETA_ deprecate support for iOS 9.x.
 
 #### Android Device Requirements
-The Beco SDK for Android requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible Android device with Android Lollipop (5.0), API Level 21+. Beco strongly recommends devices running Android 6.0.1 (Marshmallow, API 23) or later due to substantial Bluetooth bugs in older versions of the operating system. We observe that that Android does frequently exhibit device and OS specific behavior and interested parties should contact us for further details.
+The Beco SDK for Android requires a Bluetooth 4.0 (BLE, Bluetooth Smart) compatible
+Android device with Android Lollipop (5.1), API Level 22+.
+Beco *strongly* recommends devices running Android 6.0.1 (Marshmallow, API 23) or later due to substantial
+Bluetooth bugs in older versions of the operating system.
+We observe that that Android does frequently exhibit device and OS specific behavior and
+interested parties should contact us for further details.
+
+Releases after v1.0.4 _BETA_ deprecate support for Android versions prior to API 22.
 
 ## Installation
 
 #### Cordova Plugin Installation
 
 The Beco Cordova SDK can be installed in your project using the following command:
-
+```
     cordova plugin add https://github.com/becoinc/beco_cordova_sdk.git#master
-
+```
 Once you have added the plugin, run `cordova build` to update the platform-specific project files to reflect the changes.
 
 #### iOS Project Configuration
@@ -86,7 +103,8 @@ There are several platform-specific settings that must be configured to deploy a
 
 **Note:** In the above chart, commas indicate an array of values.
 
-You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when requesting location permission.
+You may change the NSLocationAlwaysUsageDescription if you'd like to alter the message that appears to users when
+requesting location permission.
 
 **Note:** On certain versions of iOS (i.e. 11) we've found that other keys are necessary for location permissions.
 Beco strongly recommends using **all** the indicated privacy keys.
@@ -96,43 +114,67 @@ These are shown in below in a snapshot from the XCode 9 Info.plist UI.
 
 *3.* You must enabled the **"Always Embed Swift Standard Libraries"** build flag.
 
-*4*. In order to work around an app store submission bug, documented here in Radar: http://www.openradar.me/radar?id=6409498411401216, you need to add the following shell script execution to the “Build Phases” section of your app build.
-
+*4*. In order to work around an app store submission bug, documented here in Radar: http://www.openradar.me/radar?id=6409498411401216,
+you need to add the following shell script execution to the “Build Phases” section of your app build.
+```
     bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/BecoSDK.framework/strip-frameworks.sh"
-
+```
 ![readme-guide-1](https://github.com/becoinc/beco_cordova_sdk/raw/develop/readme-images/readme-guide-2.png)
 
 #### Android Project Configuration
 There are several platform-specific settings that must be configured to deploy an application using the Beco Cordova SDK on Android.
 
-*1*. Change the `minSdkVersion` and `targetSdkVersion` in AndroidManifest.xml to 18 and 23 respectively, as shown below:
+*1*. Change the `minSdkVersion` and `targetSdkVersion` in AndroidManifest.xml to 22 and 23 respectively, as shown below:
+```xml
+    <uses-sdk android:minSdkVersion="22" android:targetSdkVersion="23" />
+```
+It is preferable, as demonstrated in the example apps, to set this in your
+`config.xml` file for your app and let the cordova tooling generate this.
 
-    <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="23" />
+*2*. Android's recent changes to the Permissions system require the application to request permissions at runtime,
+ which is outside the scope of the Beco Cordova SDK. The SDK requires the `ACCESS_COARSE_LOCATION` permission.
+ The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing
+ their own plugin to show a custom permission dialog.
 
-*2*. Android's recent changes to the Permissioning system require the application to request permissions at runtime, which is outside the scope of the Beco Cordova SDK. The SDK requires the `ACCESS_COARSE_LOCATION` permission. The developer may configure android permissioning via an existing plugin, as demonstrated below, or by developing their own plugin to show a custom permission dialog.
+*3*. Make sure you have Gradle installed and in your path. The cordova plugin for Android appears to use
+ Gradle to generate the gradle wrapper scripts in the project when Android is added.
+ We use homebrew to install Gradle (i.e. `brew install gradle`).
+ This is a *new* requirement with the Cordova Android platform of 7.0.0. Homebrew installs Gradle 4.5.1.
+
+*Note:* In order to support Android Studio 3.0.0 and newer you must be using v6.x.x or newer of the Android Cordova platform
+plugin. Details on migrating are available at
+[https://cordova.apache.org/announcements/2017/11/09/android-release.html](https://cordova.apache.org/announcements/2017/11/09/android-release.html).
 
 ##### Sample Permissioning Setup
-A simple way to enable Android permissioning is via the `cordova-plugin-android-permissions` plugin, which provides a JS interface for the Android SDK's permissioning system.
+A simple way to enable Android permissioning is via the `cordova-plugin-android-permissions` plugin, which provides a
+JS interface for the Android SDK's permissioning system.
 
 To install `cordova-plugin-android-permissions` in your project, run the following cordova command in your project directory:
 ```
 cordova plugin add cordova-plugin-android-permissions
 ```
 
-Then, somewhere in your application code, request permission using the following code, optionally passing in success/error callbacks to run code based on whether the application has the correct permissions. A good place to request permission is after calling `registerHandset` and before calling `startScan`.
+Then, somewhere in your application code, request permission using the following code, optionally passing in
+success/error callbacks to run code based on whether the application has the correct permissions. A good place to
+request permission is after calling `registerHandset` and before calling `startScan`.
 ```javascript
 var permissions = cordova.plugins.permissions;
 permissions.requestPermission(permissions.ACCESS_COARSE_LOCATION, success, error);
 ```
 
 If permission is already granted, the method will silently pass. If no permissions are granted, it will
-display a dialog. If the app does not have location permissions when the `startScan()` method is called, the `reportStartScanComplete` event will return an error code. The usage of this plugin is documented in the example application.
+display a dialog. If the app does not have location permissions when the `startScan()` method is called,
+the `reportStartScanComplete` event will return an error code. The usage of this plugin is documented in
+the example application.
 
 ## SDK Overview
 
-This section outlines the core functions of the Beco Mobile SDK. Specific usage and details of the individual functions overviewed here is covered in the next section: “Using the Beco SDK."
+This section outlines the core functions of the Beco Mobile SDK. Specific usage and details of the individual
+ functions overviewed here is covered in the next section: “Using the Beco SDK."
 
-**Note:** Many of the SDK's functions operate asynchronously in the background thread. Because of this, they do not return data directly, and instead use callback functions in a similar format to many other JS frameworks. See subsection "Registering Event Callbacks" under the next section: "Using the SDK."
+**Note:** Many of the SDK's functions operate asynchronously in the background thread. Because of this, they do not
+return data directly, and instead use callback functions in a similar format to many other JS frameworks.
+See subsection "Registering Event Callbacks" under the next section: "Using the SDK."
 
 #### Core
 Used to initialize the SDK, configure and authorize SDK credentials and handset metadata, and start/stop the beacon detection system.
@@ -144,7 +186,8 @@ BecoCordovaPlugin.stopScan();
 BecoCordovaPlugin.getHSID(function(hsid){...});
 ```
 #### Event Callback Functions
-Used to register callback functions that will be called periodically in response to events generated by the SDK, including real-time location updates and error reports.
+Used to register callback functions that will be called periodically in response to events generated by the SDK,
+ including real-time location updates and error reports.
 ```javascript
 BecoCordovaPlugin.onReportStartScanComplete(function(data){...});
 BecoCordovaPlugin.onReceiveLocationData(function(data){...});
@@ -154,7 +197,10 @@ BecoCordovaPlugin.onReportError(function(data){...});
 #### Advanced Performance Settings
 Used to view or modify adjustment variables meant to tweak the performance of the SDK.
 
-**NOTE:** The SDK has pre-set default values to ensure reliable indoor positioning performance. There are very rare cases where these defaults may need adjustment, and even then should only be modified after review with our Support Team in order to preserve system performance. Open a ticket via support@beco.io if you experience unexpected location performance.
+**NOTE:** The SDK has pre-set default values to ensure reliable indoor positioning performance.
+There are very rare cases where these defaults may need adjustment, and even then should only be modified
+ after review with our Support Team in order to preserve system performance. Open a ticket via support@beco.io
+  if you experience unexpected location performance.
 ```javascript
 BecoCordovaPlugin.setThresholdAdjustment(value);
 BecoCordovaPlugin.getThresholdAdjustment(function(data){...});
@@ -169,7 +215,8 @@ BecoCordovaPlugin.getPlatformVersion(function(data){...});
 ```
 
 ## Using the SDK
-The following is a detailed breakdown of each individual function of the Beco Mobile SDK, presented in the appropriate code flow order of operations.
+The following is a detailed breakdown of each individual function of the Beco Mobile SDK, presented in the
+ appropriate code flow order of operations.
 
 #### 1) Initialization & Setup
 
@@ -178,15 +225,22 @@ Before using any other functionality of the SDK, your application must authentic
 ```javascript
 BecoCordovaPlugin.setCredentials(hostname, username, password);
 ```
-- `hostname` set to “api.beco.io” to point to the Beco Cloud service. The hostname will only differ if you have a private instance of the Beco Cloud.
-- `username` refers to the SDK username that has been provided to you as part of your Beco Developer Credentials. The first part of your Beco Service Account/Mobile SDK Credentials.
-- `password` refers to the SDK password that has been provided to you as part of your Beco Developer Credentials. The second part of your Beco Service Account/Mobile SDK Credentials.
+- `hostname` set to “api.beco.io” to point to the Beco Cloud service. The hostname will only differ if you have
+a private instance of the Beco Cloud.
+- `username` refers to the SDK username that has been provided to you as part of your Beco Developer Credentials.
+The first part of your Beco Service Account/Mobile SDK Credentials.
+- `password` refers to the SDK password that has been provided to you as part of your Beco Developer Credentials.
+ The second part of your Beco Service Account/Mobile SDK Credentials.
 
-NOTE: The SDK username and SDK password should be hardcoded into your application, as these values are used to authenticate the SDK against your Customer Account and allow the application to decrypt the Beco Beacons in your network. The `registerHandset` function detailed below allows for enhanced spatial analytics with different levels of individual user visibility based on your desired use case.
+NOTE: The SDK username and SDK password should be hardcoded into your application, as these values are used to
+ authenticate the SDK against your Customer Account and allow the application to decrypt the Beco Beacons in your
+ network. The `registerHandset` function detailed below allows for enhanced spatial analytics with different
+ levels of individual user visibility based on your desired use case.
 
 #### 2) Registering Handset
 
-After the App is first installed, you must register the handset with the Beco SDK. This function configures the handset for location positioning with the SDK.
+After the App is first installed, you must register the handset with the Beco SDK. This function configures the
+ handset for location positioning with the SDK.
 
 ```javascript
 BecoCordovaPlugin.registerHandset(handsetId,
@@ -418,6 +472,18 @@ The data sourced by the SDK contributes to long term analytics data for spaces w
 
 ## Example Application
 To give you code and UI reference points for the specifics discussed above, an example application has been included in a separate repository at [https://github.com/becoinc/beco_cordova_examples](https://github.com/becoinc/beco_cordova_examples). The example application demonstrates the functionality of the Beco Cordova SDK in a JS-based app. Specific configuration and instructions are described in the `README.md` within the example project git repository.
+
+## Developing
+
+This section discusses setting up a local development environment to work
+on the Beco Cordova Plugin with the Beco Cordova Examples.
+
+*1.* Checkout the `develop` branches of:
+- [Beco Cordova SDK](https://github.com/becoinc/beco_cordova_sdk#develop)
+- [Beco Cordova Examples](https://github.com/becoinc/beco_cordova_examples)
+
+*2.* In the example apps, add the plugin using a local reference instead of the github url.
+i.e. `cordova plugin add beco-cordova-plugin --searchpath ../../beco_cordova_sdk/ --link`
 
 ## Legal
 

@@ -1,6 +1,6 @@
 {
   "name": "beco-cordova-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Beco API Cordova Plugin.",
   "cordova": {
     "id": "beco-cordova-plugin",
@@ -15,5 +15,5 @@
     "cordova-android"
   ],
   "author": "Beco, Inc",
-  "license": "https://github.com/becoinc/beco_cordova_sdk/blob/develop/LICENSE.md"
+  "license": "https://github.com/becoinc/beco_cordova_sdk/blob/master/LICENSE.md"
 }

@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="beco-cordova-plugin" version="1.0.4" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="beco-cordova-plugin" version="1.0.6"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <name>beco-cordova-plugin</name>
+    <description>Cordova Support for the Beco SDK.</description>
+    <license>Proprietary.</license>
 
     <js-module name="BecoCordovaPlugin" src="www/BecoCordovaPlugin.js">
         <clobbers target="BecoCordovaPlugin"/>
@@ -41,7 +46,8 @@
         <source-file src="src/android/BecoCordovaPlugin.java" target-dir="src/beco/plugin/cordova" />
 
         <framework src="src/android/beco-cordova-android.gradle" custom="true" type="gradleReference" />
-        <resource-file src="src/android/lib/libbecoandroidsdk-all-release.aar" target="libs/libbecoandroidsdk-all-release.aar" />
+        <lib-file src="src/android/lib/libbecoandroidsdk-all-release.aar" arch="device" />
+        <lib-file src="src/android/lib/libbecoandroidsdk-all-release.aar" arch="simulator" />
 
     </platform>
 

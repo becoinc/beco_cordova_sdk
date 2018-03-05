@@ -5,12 +5,3 @@ Instructions to install new version of Android SDK
 1) Delete old version of `libbecoandroidsdk-all-release.aar`
 2) Update this file with original filename for current Android SDK installed.
 3) Copy new SDK into folder, rename to `libbecoandroidsdk-all-release.aar`
-4) Navigate into file using ZIP utility. clear the 'res' folder of all resources
-except for the `xml` folder.
-5) remove strings/icon references from the application manifest.
-
-Step 4 and 5 are necessary in order for Android Studio to correctly build a merged
-application manifest. The project will not build if there are settings from the API
-manifest that overlap settings in the project manifest.
-
-Latest version: libbecoandroidsdk-release-20170911-77bb63f.aar

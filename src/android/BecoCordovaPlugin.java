@@ -51,11 +51,11 @@ import io.beco.sdk.android.bas.exception.CredentialsNotSetException;
 ////////////////////////////////////////////////
 
 public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate {
-    
+
     //Log tag identifier
     private static final String TAG = "[Beco SDK]";
     private static final boolean DEBUG = false;
-    
+
     //Instance member variables
     private BecoSDKInterface sdk;
     private String onReceiveLocationDataCallback;
@@ -66,14 +66,14 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     private CallbackContext onReportErrorCallbackContext;
     private CallbackContext onReportAppHitCallbackContext;
     private CallbackContext onReportStartScanCompleteCallbackContext;
-    
+
     private int refreshIntervalValue = 10;
     private int thresholdAdjustmentValue = 7;
-    
+
     ////////////////////////////////////////////////
     // Cordova Plugin Implementation
     ////////////////////////////////////////////////
-    
+
     /*
      pluginInitialize
      Called when the Cordova instance initializes.
@@ -83,19 +83,19 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     @Override
     protected void pluginInitialize() {
         super.pluginInitialize();
-        
+
         Context cordovaContext = cordova.getActivity().getApplicationContext();
         sdk = new BecoSDKInterface(cordovaContext,this);
-        
+
         if (DEBUG) LOG.i(TAG, "Initialized Cordova Plugin.");
     }
-    
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         final String threadedAction = action;
         final JSONArray threadedArgs = new JSONArray(args.toString());
         final CallbackContext threadedCallbackContext = callbackContext;
-        
+
         //cordova.getThreadPool().execute(new Runnable(){
         //@Override
         //public void run() {
@@ -139,11 +139,11 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         //});
         return true;
     }
-    
+
     ////////////////////////////////////////////////
     // Lifecycle / Core API Functions
     ////////////////////////////////////////////////
-    
+
     /*----------------------------------------------
      startScan
      Starts the background scanning for beacons.
@@ -159,7 +159,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
             if (DEBUG) Log.e(TAG,"Could not start scan. "+e.getMessage());
         }
     }
-    
+
     /*----------------------------------------------
      stopScan
      Ends the background scanning for beacons.
@@ -170,15 +170,33 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         if (DEBUG) Log.i(TAG,"Stopped scanning for beacons.");
         callbackContext.success();
     }
-    
-    
+
+
     /*----------------------------------------------
      registerHandset
      Registers a handset with the Beco API.
      Parameters:
      */
     public void registerHandset(String idfa, String personId, String groupId, String userData, final CallbackContext callbackContext){
-        
+
+        // The null semantics here are odd.
+        // It seems like the javascript null values passes a "null"
+        // string value.
+        if( "null".equals( idfa ) )
+        {
+            idfa = null;
+        }
+
+        if( "null".equals( personId ) )
+        {
+            personId = null;
+        }
+
+        if( "null".equals( groupId ) )
+        {
+            groupId = null;
+        }
+
         //try to map idfa to a UUID object
         //If fail, set it to null
         UUID idfaUUIDObject = null;
@@ -189,17 +207,17 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                 idfaUUIDObject = null;
             }
         }
-        
+
         try {
             //Map the userdata into map object
             Map<String, Object> userDataMap = new HashMap<String,Object>();
             userDataMap.put("userData",userData);
-            
+
             sdk.registerHandset(idfaUUIDObject, personId, groupId, userDataMap, new RegisterHandsetComplete() {
                 @Override
                 public void onRegisterComplete(boolean success, HttpStatus httpStatus, RegisterHandsetResponse registerHandsetResponse) {
                     ObjectMapper mapper = new ObjectMapper();
-                    
+
                     try {
                         if (success) {
                             if (registerHandsetResponse != null) {
@@ -220,11 +238,11 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
             callbackContext.error("Failed to register handset! "+e.getMessage());
         }
     }
-    
+
     ////////////////////////////////////////////////
     // Event Listener Functions
     ////////////////////////////////////////////////
-    
+
     /*----------------------------------------------
      onReceiveLocationData
      Registers a callback function for the corresponding delegate function.
@@ -234,7 +252,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         onReceiveLocationDataCallbackContext = callbackContext;
         onReceiveLocationDataCallback = callbackContext.getCallbackId();
     }
-    
+
     /*----------------------------------------------
      onReportError
      Registers a callback function for the corresponding delegate function.
@@ -244,7 +262,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         onReportErrorCallbackContext = callbackContext;
         onReportErrorCallback = callbackContext.getCallbackId();
     }
-    
+
     /*----------------------------------------------
      onReportAppHit
      Registers a callback function for the corresponding delegate function.
@@ -255,7 +273,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         onReportAppHitCallback = callbackContext.getCallbackId();
         if (DEBUG) LOG.w(TAG,"WARNING: appHit event is not supported on android platform! Please use onReceiveLocationData event. See the Beco Cordova SDK documentation for details.");
     }
-    
+
     /*----------------------------------------------
      onReportStartScanComplete
      Registers a callback function for the corresponding delegate function.
@@ -265,18 +283,18 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         onReportStartScanCompleteCallbackContext = callbackContext;
         onReportStartScanCompleteCallback = callbackContext.getCallbackId();
     }
-    
+
     ////////////////////////////////////////////////
     // Delegate Functions
     ////////////////////////////////////////////////
-    
+
     @Override
     public void reportError(BecoSDKErrorCode becoSDKErrorCode) {
         if (onReportErrorCallback != null){
-            
+
             ObjectMapper mapper = new ObjectMapper();
             JSONObject errDataJsonObj;
-            
+
             String[] tempStatusArray = {
                 "Credential Mismatch",
                 "Customer Not Found",
@@ -287,40 +305,40 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                 "Location Services Disabled",
                 "Location Services Enabled"
             };
-            
+
             HashMap<String, Object> tempHashMap = new HashMap<String, Object>();
             tempHashMap.put("errorCode", becoSDKErrorCode.ordinal());
             tempHashMap.put("errorString",tempStatusArray[becoSDKErrorCode.ordinal()]);
-            
+
             try {
                 errDataJsonObj = new JSONObject(mapper.writeValueAsString(tempHashMap));
             } catch (Exception e){
                 //Do nothing if there is an error, return null response
                 errDataJsonObj = null;
             }
-            
+
             PluginResult result = new PluginResult(PluginResult.Status.OK, errDataJsonObj);
             result.setKeepCallback(true);
-            
+
             //Display a debug message
             if (DEBUG) LOG.i(TAG,"Got reportError event. Calling callback function...");
             onReceiveLocationDataCallbackContext.sendPluginResult(result);
         }
     }
-    
+
     @Override
     public void receiveLocationData(ActivityResponse activityResponse, long lastTime) {
         if (onReceiveLocationDataCallback != null){
-            
+
             //Default OK result without any data attached
             PluginResult result = new PluginResult(PluginResult.Status.OK);
-            
+
             //Attach data to result if the location returned isn't null
             if (activityResponse != null){
                 if (DEBUG) LOG.i(TAG,"Received Location Data: Beco Id: "+activityResponse.getBecoId()+", Place: "+activityResponse.getPlace()+", Location: "+activityResponse.getLocation());
-                
+
                 ObjectMapper mapper = new ObjectMapper();
-                
+
                 /*
                  NSDictionary *locDict = @{
                  @"becoId" : locationData.becoId,
@@ -341,20 +359,20 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                  }
                  };
                  */
-                
+
                 HashMap<String, Object> tempHashMap = new HashMap<String, Object>();
                 tempHashMap.put("becoId", activityResponse.getBecoId());
                 tempHashMap.put("hsid",sdk.getBecoHsid());
-                
+
                 HashMap<String, Object> tempPlaceMap = new HashMap<String, Object>();
                 tempPlaceMap.put("placeName",activityResponse.getPlace() != null ? activityResponse.getPlace().getPlaceName() : null);
                 tempPlaceMap.put("placeId",activityResponse.getPlace() != null ? activityResponse.getPlace().getPlaceId() : null);
                 tempPlaceMap.put("comments",activityResponse.getPlace() != null ? activityResponse.getPlace().getComments() : null);
                 tempPlaceMap.put("capacity",null);
-                
+
                 HashMap<String, Object> tempFloorMap = new HashMap<String, Object>();
                 HashMap<String, Object> tempLocationMap = new HashMap<String, Object>();
-                
+
                 try {
                     tempFloorMap.put("name",activityResponse.getPlace().getFloor().getName());
                 } catch (Exception e){
@@ -365,7 +383,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                 } catch (Exception e){
                     tempFloorMap.put("floorId",null);
                 }
-                
+
                 try {
                     tempLocationMap.put("locationName",activityResponse.getPlace().getLocation().getLocationName());
                 } catch (Exception e){
@@ -376,12 +394,12 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                 } catch (Exception e){
                     tempLocationMap.put("locationId",null);
                 }
-                
+
                 tempPlaceMap.put("floor",tempFloorMap);
                 tempPlaceMap.put("location",tempLocationMap);
-                
+
                 tempHashMap.put("place",tempPlaceMap);
-                
+
                 String locationDataSerialized = null;
                 JSONObject locationDataJsonObj = null;
                 try {
@@ -391,30 +409,30 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                     //Do nothing if there is an error, return null response
                     locationDataJsonObj = null;
                 }
-                
+
                 //Override default result to return the location data as a serialized JSON object
                 result = new PluginResult(PluginResult.Status.OK,locationDataJsonObj);
             }
-            
+
             //Set flag to keep the callback function so we can call it multiple times
             result.setKeepCallback(true);
-            
+
             //Display a debug message
             if (DEBUG) LOG.i(TAG,"Got receiveLocationData event. Calling callback function...");
-            
+
             //Send the result to the callback function
             onReceiveLocationDataCallbackContext.sendPluginResult(result);
         }
     }
-    
-    
+
+
     @Override
     public void onStartScanComplete(boolean success) {
         if (onReportStartScanCompleteCallback != null){
-            
+
             ObjectMapper mapper = new ObjectMapper();
             JSONObject startScanCompleteJsonObj;
-            
+
             String[] tempStatusArray = {
                 "Success",
                 "Location Unauthorized",
@@ -426,33 +444,33 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
                 "Credential Error",
                 "Already Scanning",
                 "Unknown Failure"};
-            
+
             HashMap<String, Object> tempHashMap = new HashMap<String, Object>();
             tempHashMap.put("statusCode", success);
             tempHashMap.put("statusString",success ? tempStatusArray[0] : tempStatusArray[9] );
-            
+
             try {
                 startScanCompleteJsonObj = new JSONObject(mapper.writeValueAsString(tempHashMap));
             } catch (Exception e){
                 //Do nothing if there is an error, return null response
                 startScanCompleteJsonObj = null;
             }
-            
+
             //If we've set a callback ID for the 'report scan complete' event, call it and return data.
             PluginResult result = new PluginResult(success ? PluginResult.Status.OK : PluginResult.Status.ERROR,startScanCompleteJsonObj);
             result.setKeepCallback(true);
             onReportStartScanCompleteCallbackContext.sendPluginResult(result);
         }
     }
-    
+
     public void apiHit(){
         if (DEBUG) LOG.e(TAG,"Operation unsupported on Android platform.");
     }
-    
+
     ////////////////////////////////////////////////
     // Setters
     ////////////////////////////////////////////////
-    
+
     /*----------------------------------------------
      setCredentials
      Sets the username and password that the Beco API will use.
@@ -463,8 +481,8 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         callbackContext.success();
         if (DEBUG) LOG.i(TAG,"Set user API credentials.");
     }
-    
-    
+
+
     /*----------------------------------------------
      setThresholdAdjustment
      Sets the threshold adjustment tweak value.
@@ -482,7 +500,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
             callbackContext.error("Failed to set thresholdAdjustment tweak value! " + e.getMessage());
         }
     }
-    
+
     /*----------------------------------------------
      setRefreshInterval
      Sets the refresh interval tweak value.
@@ -500,11 +518,11 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
             callbackContext.error("Failed to set refreshInterval tweak value! " + e.getMessage());
         }
     }
-    
+
     ////////////////////////////////////////////////
     // Getters
     ////////////////////////////////////////////////
-    
+
     /*----------------------------------------------
      getVersion
      Gets the version ID for the currently running Beco API.
@@ -513,7 +531,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     public void getVersion(CallbackContext callbackContext){
         callbackContext.success(sdk.getVersion());
     }
-    
+
     /*----------------------------------------------
      getThresholdAdjustment
      Gets the threshold adjustment tweak value
@@ -522,7 +540,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     public void getThresholdAdjustment(CallbackContext callbackContext){
         callbackContext.success(thresholdAdjustmentValue);
     }
-    
+
     /*----------------------------------------------
      getRefreshInterval
      Gets the refresh interval tweak value
@@ -531,7 +549,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
     public void getRefreshInterval(CallbackContext callbackContext){
         callbackContext.success(refreshIntervalValue);
     }
-    
+
     /*----------------------------------------------
      getSdkState
      Gets the SDK state.
@@ -541,7 +559,7 @@ public class BecoCordovaPlugin extends CordovaPlugin implements BecoSDKDelegate 
         callbackContext.error("Operation unsupported on Android platform.");
         if (DEBUG) LOG.e(TAG,"Operation unsupported on Android platform.");
     }
-    
+
     /*----------------------------------------------
      getHsid
      Gets the HSID for use with the Beco API.
